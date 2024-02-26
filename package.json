@@ -1,0 +1,32 @@
+{
+  "name": "tree-sitter-rstml",
+  "version": "0.0.1",
+  "description": "rstml grammar for tree-sitter",
+  "main": "bindings/node",
+  "keywords": ["parser", "rust", "rstml"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rayliwell/tree-sitter-rstml.git"
+  },
+  "author": "Ryan Halliwell <git@rayliwell.com>",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "node-gyp": "^10.0.1",
+    "prettier": "^3.2.5",
+    "tree-sitter-cli": "^0.20.8",
+    "tree-sitter-rust": "^0.20.4"
+  },
+  "scripts": {
+    "build": "npm run import-scanner && tree-sitter generate && node-gyp build",
+    "import-scanner": "mkdir -p src && cp node_modules/tree-sitter-rust/src/scanner.c src/scanner.c && sed -i 's/rust/rstml/g' src/scanner.c",
+    "build-wasm": "tree-sitter build-wasm",
+    "playground": "npm run build && npm run build-wasm && tree-sitter playground",
+    "lint": "eslint grammar.js",
+    "parse": "tree-sitter parse",
+    "test": "tree-sitter test && script/parse-examples",
+    "test-windows": "tree-sitter test"
+  }
+}
