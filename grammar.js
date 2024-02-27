@@ -44,8 +44,29 @@ module.exports = grammar({
 
     element_node: $ => seq($.open_tag, $.close_tag),
 
-    open_tag: _ => seq('<', '>'),
+    open_tag: $ =>
+      seq('<', optional(field('tag_name', $.tag_indentifier)), '>'),
 
-    close_tag: _ => seq('<', '/>'),
+    close_tag: $ =>
+      seq('</', optional(field('tag_name', $.tag_indentifier)), '>'),
+
+    tag_indentifier: $ =>
+      sepBy1($._tag_identifier_punctuation, $._tag_identifier_part),
+
+    _tag_identifier_part: _ => /[a-zA-Z][0-9a-zA-Z]*/,
+
+    _tag_identifier_punctuation: _ => token.immediate(choice(':', '::', '-')),
   },
 })
+
+/**
+ * Creates a rule to match one or more of the rules separated by the separator.
+ *
+ * @param {RuleOrLiteral} sep - The separator to use.
+ * @param {RuleOrLiteral} rule
+ *
+ * @return {SeqRule}
+ */
+function sepBy1(sep, rule) {
+  return seq(rule, repeat(seq(sep, rule)))
+}

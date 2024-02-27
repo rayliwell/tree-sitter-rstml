@@ -8701,6 +8701,22 @@
           "value": "<"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "tag_name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "tag_indentifier"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": ">"
         }
@@ -8711,13 +8727,78 @@
       "members": [
         {
           "type": "STRING",
-          "value": "<"
+          "value": "</"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "tag_name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "tag_indentifier"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
-          "value": "/>"
+          "value": ">"
         }
       ]
+    },
+    "tag_indentifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_tag_identifier_part"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_tag_identifier_punctuation"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_tag_identifier_part"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_tag_identifier_part": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z][0-9a-zA-Z]*"
+    },
+    "_tag_identifier_punctuation": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": ":"
+          },
+          {
+            "type": "STRING",
+            "value": "::"
+          },
+          {
+            "type": "STRING",
+            "value": "-"
+          }
+        ]
+      }
     }
   },
   "extras": [

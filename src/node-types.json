@@ -1123,7 +1123,18 @@
   {
     "type": "close_tag",
     "named": true,
-    "fields": {}
+    "fields": {
+      "tag_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tag_indentifier",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "closure_expression",
@@ -2873,7 +2884,18 @@
   {
     "type": "open_tag",
     "named": true,
-    "fields": {}
+    "fields": {
+      "tag_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "tag_indentifier",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "optional_type_parameter",
@@ -3691,6 +3713,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "tag_indentifier",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "token_binding_pattern",
@@ -4854,10 +4881,6 @@
     "named": false
   },
   {
-    "type": "/>",
-    "named": false
-  },
-  {
     "type": ":",
     "named": false
   },
@@ -4871,6 +4894,10 @@
   },
   {
     "type": "<",
+    "named": false
+  },
+  {
+    "type": "</",
     "named": false
   },
   {
