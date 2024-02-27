@@ -40,7 +40,12 @@ module.exports = grammar({
 
     _delim_nodes: $ => seq('{', $.nodes, '}'),
 
-    // TODO: Implement nodes grammar.
-    nodes: _ => repeat1('!'),
+    nodes: $ => repeat1($.element_node),
+
+    element_node: $ => seq($.open_tag, $.close_tag),
+
+    open_tag: _ => seq('<', '>'),
+
+    close_tag: _ => seq('<', '/>'),
   },
 })

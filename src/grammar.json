@@ -8676,9 +8676,48 @@
     "nodes": {
       "type": "REPEAT1",
       "content": {
-        "type": "STRING",
-        "value": "!"
+        "type": "SYMBOL",
+        "name": "element_node"
       }
+    },
+    "element_node": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "open_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "close_tag"
+        }
+      ]
+    },
+    "open_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
+    },
+    "close_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "STRING",
+          "value": "/>"
+        }
+      ]
     }
   },
   "extras": [
