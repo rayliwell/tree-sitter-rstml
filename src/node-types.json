@@ -2261,6 +2261,11 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "if_expression",
     "named": true,
     "fields": {
@@ -2602,8 +2607,12 @@
     },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "nodes",
+          "named": true
+        },
         {
           "type": "token_tree",
           "named": true
@@ -2821,6 +2830,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "nodes",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "optional_type_parameter",
@@ -4981,10 +4995,6 @@
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
-  },
-  {
     "type": "if",
     "named": false
   },
@@ -5142,6 +5152,10 @@
   },
   {
     "type": "use",
+    "named": false
+  },
+  {
+    "type": "view",
     "named": false
   },
   {
