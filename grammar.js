@@ -45,12 +45,24 @@ module.exports = grammar({
     element_node: $ => seq($.open_tag, $.close_tag),
 
     open_tag: $ =>
-      seq('<', optional(field('tag_name', $.tag_indentifier)), '>'),
+      seq(
+        '<',
+        optional(
+          seq(
+            field('tag_name', $.tag_identifier),
+            repeat($.tag_attribute_expression),
+          ),
+        ),
+        token(prec(1, '>')),
+      ),
 
     close_tag: $ =>
-      seq('</', optional(field('tag_name', $.tag_indentifier)), '>'),
+      seq('</', optional(field('tag_name', $.tag_identifier)), '>'),
 
-    tag_indentifier: $ =>
+    tag_attribute_expression: $ =>
+      seq($.tag_identifier, optional(seq('=', $._expression))),
+
+    tag_identifier: $ =>
       sepBy1($._tag_identifier_punctuation, $._tag_identifier_part),
 
     _tag_identifier_part: _ => /[a-zA-Z][0-9a-zA-Z]*/,

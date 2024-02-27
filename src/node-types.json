@@ -1129,7 +1129,7 @@
         "required": false,
         "types": [
           {
-            "type": "tag_indentifier",
+            "type": "tag_identifier",
             "named": true
           }
         ]
@@ -2890,11 +2890,21 @@
         "required": false,
         "types": [
           {
-            "type": "tag_indentifier",
+            "type": "tag_identifier",
             "named": true
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "tag_attribute_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3715,7 +3725,26 @@
     }
   },
   {
-    "type": "tag_indentifier",
+    "type": "tag_attribute_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        },
+        {
+          "type": "tag_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tag_identifier",
     "named": true,
     "fields": {}
   },
