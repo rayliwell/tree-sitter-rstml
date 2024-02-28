@@ -24,16 +24,16 @@ module.exports = grammar({
     nodes: $ => prec.dynamic(1, repeat1($._node)),
 
     _node: $ =>
-      choice($.element_node, $.self_closing_element_node, $.fragment_node),
-
-    element_node: $ =>
-      seq(
-        field('open_tag', $.open_tag),
-        field('children', optional($.nodes)),
-        field('close_tag', $.close_tag),
+      choice(
+        $.element_node,
+        $.self_closing_element_node,
+        $.fragment_node,
+        $.string_literal,
+        $.text_node,
+        $.block,
       ),
 
-    fragment_node: $ => seq('<>', optional($.nodes), '</>'),
+    fragment_node: $ => seq('<>', field('children', optional($.nodes)), '</>'),
 
     self_closing_element_node: $ =>
       seq(
@@ -41,6 +41,13 @@ module.exports = grammar({
         field('name', $.node_identifier),
         field('attributes', $.node_attributes),
         token(prec(1, '/>')),
+      ),
+
+    element_node: $ =>
+      seq(
+        field('open_tag', $.open_tag),
+        field('children', optional($.nodes)),
+        field('close_tag', $.close_tag),
       ),
 
     open_tag: $ =>
@@ -62,11 +69,13 @@ module.exports = grammar({
       ),
 
     node_identifier: $ =>
-      sepBy1($._node_identifier_separator, $._node_identifier_part),
+      sepBy1($._node_identifier_delimiter, $._node_identifier_part),
 
     _node_identifier_part: _ => /[a-zA-Z][0-9a-zA-Z]*/,
 
-    _node_identifier_separator: _ => token.immediate(choice(':', '::', '-')),
+    _node_identifier_delimiter: _ => token.immediate(choice(':', '::', '-')),
+
+    text_node: $ => /[^{}<>"\s]([^{}<>\n"]*[^{}<>"\s])?/,
   },
 })
 
