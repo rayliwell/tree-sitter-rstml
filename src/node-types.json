@@ -2940,6 +2940,10 @@
         {
           "type": "element_node",
           "named": true
+        },
+        {
+          "type": "self_closing_element_node",
+          "named": true
         }
       ]
     }
@@ -3514,6 +3518,32 @@
           },
           {
             "type": "super",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "self_closing_element_node",
+    "named": true,
+    "fields": {
+      "attributes": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "node_attributes",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "node_identifier",
             "named": true
           }
         ]
@@ -4946,6 +4976,10 @@
   },
   {
     "type": "/=",
+    "named": false
+  },
+  {
+    "type": "/>",
     "named": false
   },
   {

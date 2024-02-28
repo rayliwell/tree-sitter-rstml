@@ -44,13 +44,21 @@ module.exports = grammar({
 
     nodes: $ => prec.dynamic(1, repeat1($._node)),
 
-    _node: $ => $.element_node,
+    _node: $ => choice($.element_node, $.self_closing_element_node),
 
     element_node: $ =>
       seq(
         field('open_tag', $.open_tag),
         field('children', optional($.nodes)),
         field('close_tag', $.close_tag),
+      ),
+
+    self_closing_element_node: $ =>
+      seq(
+        '<',
+        field('name', $.node_identifier),
+        field('attributes', $.node_attributes),
+        token(prec(1, '/>')),
       ),
 
     open_tag: $ =>
