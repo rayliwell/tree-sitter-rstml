@@ -2339,6 +2339,11 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "if_expression",
     "named": true,
     "fields": {
@@ -2680,8 +2685,12 @@
     },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "nodes",
+          "named": true
+        },
         {
           "type": "token_tree",
           "named": true
@@ -3663,11 +3672,19 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "nodes",
+          "type": "_declaration_statement",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "shebang",
           "named": true
         }
       ]
@@ -5230,10 +5247,6 @@
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
-  },
-  {
     "type": "if",
     "named": false
   },
@@ -5334,6 +5347,10 @@
     "named": true
   },
   {
+    "type": "shebang",
+    "named": true
+  },
+  {
     "type": "shorthand_field_identifier",
     "named": true
   },
@@ -5391,6 +5408,10 @@
   },
   {
     "type": "use",
+    "named": false
+  },
+  {
+    "type": "view",
     "named": false
   },
   {
