@@ -8674,22 +8674,54 @@
       ]
     },
     "nodes": {
-      "type": "REPEAT1",
+      "type": "PREC_DYNAMIC",
+      "value": 1,
       "content": {
-        "type": "SYMBOL",
-        "name": "element_node"
+        "type": "REPEAT1",
+        "content": {
+          "type": "SYMBOL",
+          "name": "_node"
+        }
       }
+    },
+    "_node": {
+      "type": "SYMBOL",
+      "name": "element_node"
     },
     "element_node": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "open_tag"
+          "type": "FIELD",
+          "name": "open_tag",
+          "content": {
+            "type": "SYMBOL",
+            "name": "open_tag"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "close_tag"
+          "type": "FIELD",
+          "name": "children",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "nodes"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "close_tag",
+          "content": {
+            "type": "SYMBOL",
+            "name": "close_tag"
+          }
         }
       ]
     },
@@ -8708,17 +8740,26 @@
               "members": [
                 {
                   "type": "FIELD",
-                  "name": "tag_name",
+                  "name": "name",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "tag_identifier"
+                    "name": "node_identifier"
                   }
                 },
                 {
-                  "type": "REPEAT",
+                  "type": "FIELD",
+                  "name": "attributes",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "tag_attribute_expression"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "node_attributes"
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
                   }
                 }
               ]
@@ -8753,10 +8794,10 @@
           "members": [
             {
               "type": "FIELD",
-              "name": "tag_name",
+              "name": "name",
               "content": {
                 "type": "SYMBOL",
-                "name": "tag_identifier"
+                "name": "node_identifier"
               }
             },
             {
@@ -8770,12 +8811,23 @@
         }
       ]
     },
-    "tag_attribute_expression": {
+    "node_attributes": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "node_attribute"
+      }
+    },
+    "node_attribute": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "tag_identifier"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "node_identifier"
+          }
         },
         {
           "type": "CHOICE",
@@ -8788,8 +8840,12 @@
                   "value": "="
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "_expression"
+                  "type": "FIELD",
+                  "name": "value",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_expression"
+                  }
                 }
               ]
             },
@@ -8800,12 +8856,12 @@
         }
       ]
     },
-    "tag_identifier": {
+    "node_identifier": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_tag_identifier_part"
+          "name": "_node_identifier_part"
         },
         {
           "type": "REPEAT",
@@ -8814,22 +8870,22 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_tag_identifier_punctuation"
+                "name": "_node_identifier_separator"
               },
               {
                 "type": "SYMBOL",
-                "name": "_tag_identifier_part"
+                "name": "_node_identifier_part"
               }
             ]
           }
         }
       ]
     },
-    "_tag_identifier_part": {
+    "_node_identifier_part": {
       "type": "PATTERN",
       "value": "[a-zA-Z][0-9a-zA-Z]*"
     },
-    "_tag_identifier_punctuation": {
+    "_node_identifier_separator": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "CHOICE",
@@ -8888,6 +8944,9 @@
     [
       "type_parameters",
       "for_lifetimes"
+    ],
+    [
+      "nodes"
     ]
   ],
   "precedences": [],

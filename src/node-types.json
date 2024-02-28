@@ -1124,12 +1124,12 @@
     "type": "close_tag",
     "named": true,
     "fields": {
-      "tag_name": {
+      "name": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "tag_identifier",
+            "type": "node_identifier",
             "named": true
           }
         ]
@@ -1442,20 +1442,37 @@
   {
     "type": "element_node",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "close_tag",
-          "named": true
-        },
-        {
-          "type": "open_tag",
-          "named": true
-        }
-      ]
+    "fields": {
+      "children": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "nodes",
+            "named": true
+          }
+        ]
+      },
+      "close_tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "close_tag",
+            "named": true
+          }
+        ]
+      },
+      "open_tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "open_tag",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2867,6 +2884,52 @@
     }
   },
   {
+    "type": "node_attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "node_identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "node_attributes",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "node_attribute",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "node_identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "nodes",
     "named": true,
     "fields": {},
@@ -2885,26 +2948,26 @@
     "type": "open_tag",
     "named": true,
     "fields": {
-      "tag_name": {
+      "attributes": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "tag_identifier",
+            "type": "node_attributes",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "node_identifier",
             "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "tag_attribute_expression",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -3723,30 +3786,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "tag_attribute_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "_expression",
-          "named": true
-        },
-        {
-          "type": "tag_identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tag_identifier",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "token_binding_pattern",

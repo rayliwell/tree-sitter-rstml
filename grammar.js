@@ -12,6 +12,8 @@ module.exports = grammar({
 
   name: 'rstml',
 
+  conflicts: $ => [...rustGrammar.conflicts($), [$.nodes]],
+
   rules: {
     ...rustGrammar.rules,
 
@@ -40,34 +42,45 @@ module.exports = grammar({
 
     _delim_nodes: $ => seq('{', $.nodes, '}'),
 
-    nodes: $ => repeat1($.element_node),
+    nodes: $ => prec.dynamic(1, repeat1($._node)),
 
-    element_node: $ => seq($.open_tag, $.close_tag),
+    _node: $ => $.element_node,
+
+    element_node: $ =>
+      seq(
+        field('open_tag', $.open_tag),
+        field('children', optional($.nodes)),
+        field('close_tag', $.close_tag),
+      ),
 
     open_tag: $ =>
       seq(
         '<',
         optional(
           seq(
-            field('tag_name', $.tag_identifier),
-            repeat($.tag_attribute_expression),
+            field('name', $.node_identifier),
+            field('attributes', optional($.node_attributes)),
           ),
         ),
         token(prec(1, '>')),
       ),
 
-    close_tag: $ =>
-      seq('</', optional(field('tag_name', $.tag_identifier)), '>'),
+    close_tag: $ => seq('</', optional(field('name', $.node_identifier)), '>'),
 
-    tag_attribute_expression: $ =>
-      seq($.tag_identifier, optional(seq('=', $._expression))),
+    node_attributes: $ => repeat1($.node_attribute),
 
-    tag_identifier: $ =>
-      sepBy1($._tag_identifier_punctuation, $._tag_identifier_part),
+    node_attribute: $ =>
+      seq(
+        field('name', $.node_identifier),
+        optional(seq('=', field('value', $._expression))),
+      ),
 
-    _tag_identifier_part: _ => /[a-zA-Z][0-9a-zA-Z]*/,
+    node_identifier: $ =>
+      sepBy1($._node_identifier_separator, $._node_identifier_part),
 
-    _tag_identifier_punctuation: _ => token.immediate(choice(':', '::', '-')),
+    _node_identifier_part: _ => /[a-zA-Z][0-9a-zA-Z]*/,
+
+    _node_identifier_separator: _ => token.immediate(choice(':', '::', '-')),
   },
 })
 
