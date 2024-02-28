@@ -23,7 +23,8 @@ module.exports = grammar({
 
     nodes: $ => prec.dynamic(1, repeat1($._node)),
 
-    _node: $ => choice($.element_node, $.self_closing_element_node),
+    _node: $ =>
+      choice($.element_node, $.self_closing_element_node, $.fragment_node),
 
     element_node: $ =>
       seq(
@@ -31,6 +32,8 @@ module.exports = grammar({
         field('children', optional($.nodes)),
         field('close_tag', $.close_tag),
       ),
+
+    fragment_node: $ => seq('<>', optional($.nodes), '</>'),
 
     self_closing_element_node: $ =>
       seq(
@@ -43,16 +46,12 @@ module.exports = grammar({
     open_tag: $ =>
       seq(
         '<',
-        optional(
-          seq(
-            field('name', $.node_identifier),
-            field('attributes', optional($.node_attributes)),
-          ),
-        ),
+        field('name', $.node_identifier),
+        field('attributes', optional($.node_attributes)),
         token(prec(1, '>')),
       ),
 
-    close_tag: $ => seq('</', optional(field('name', $.node_identifier)), '>'),
+    close_tag: $ => seq('</', field('name', $.node_identifier), '>'),
 
     node_attributes: $ => repeat1($.node_attribute),
 
