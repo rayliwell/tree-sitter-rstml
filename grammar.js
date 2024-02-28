@@ -28,6 +28,7 @@ module.exports = grammar({
         $.element_node,
         $.self_closing_element_node,
         $.fragment_node,
+        $.comment_node,
         $.string_literal,
         $.text_node,
         $.block,
@@ -35,10 +36,12 @@ module.exports = grammar({
 
     fragment_node: $ => seq('<>', field('children', optional($.nodes)), '</>'),
 
+    comment_node: $ => seq('<!--', repeat(/./), token(prec(1, '-->'))),
+
     self_closing_element_node: $ =>
       seq(
         '<',
-        field('name', $.node_identifier),
+        choice(field('name', $.node_identifier), $.block),
         field('attributes', $.node_attributes),
         token(prec(1, '/>')),
       ),

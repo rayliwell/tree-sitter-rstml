@@ -1192,6 +1192,11 @@
     }
   },
   {
+    "type": "comment_node",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "compound_assignment_expr",
     "named": true,
     "fields": {
@@ -2949,6 +2954,10 @@
           "named": true
         },
         {
+          "type": "comment_node",
+          "named": true
+        },
+        {
           "type": "element_node",
           "named": true
         },
@@ -3563,7 +3572,7 @@
       },
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "node_identifier",
@@ -3571,6 +3580,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "block",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -4962,6 +4981,10 @@
     "named": false
   },
   {
+    "type": "-->",
+    "named": false
+  },
+  {
     "type": "-=",
     "named": false
   },
@@ -5011,6 +5034,10 @@
   },
   {
     "type": "<",
+    "named": false
+  },
+  {
+    "type": "<!--",
     "named": false
   },
   {
