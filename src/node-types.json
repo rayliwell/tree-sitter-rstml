@@ -1417,6 +1417,11 @@
     }
   },
   {
+    "type": "doctype_node",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "dynamic_type",
     "named": true,
     "fields": {
@@ -2955,6 +2960,10 @@
         },
         {
           "type": "comment_node",
+          "named": true
+        },
+        {
+          "type": "doctype_node",
           "named": true
         },
         {
@@ -5034,6 +5043,10 @@
   },
   {
     "type": "<",
+    "named": false
+  },
+  {
+    "type": "<!",
     "named": false
   },
   {

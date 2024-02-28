@@ -8633,6 +8633,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "doctype_node"
+        },
+        {
+          "type": "SYMBOL",
           "name": "comment_node"
         },
         {
@@ -8675,6 +8679,37 @@
         {
           "type": "STRING",
           "value": "</>"
+        }
+      ]
+    },
+    "doctype_node": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<!"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[Dd][Oo][Cc][Tt][Yy][Pp][Ee]"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "PATTERN",
+            "value": "."
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "STRING",
+              "value": ">"
+            }
+          }
         }
       ]
     },
