@@ -19,19 +19,33 @@ use tree_sitter::Language;
 
 extern "C" {
     fn tree_sitter_rstml() -> Language;
+    fn tree_sitter_rust_with_rstml() -> Language;
 }
 
 /// Get the tree-sitter [Language][] for this grammar.
 ///
 /// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-pub fn language() -> Language {
+pub fn language_rstml() -> Language {
     unsafe { tree_sitter_rstml() }
+}
+
+/// Get the tree-sitter [Language][] for this grammar.
+///
+/// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
+pub fn language_rust_with_rstml() -> Language {
+    unsafe { tree_sitter_rust_with_rstml() }
 }
 
 /// The content of the [`node-types.json`][] file for this grammar.
 ///
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
-pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
+pub const RSTML_NODE_TYPES: &'static str = include_str!("../../standalone/src/node-types.json");
+
+/// The content of the [`node-types.json`][] file for this grammar.
+///
+/// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
+pub const RUST_WITH_RSTML_NODE_TYPES: &'static str =
+    include_str!("../../standalone/src/node-types.json");
 
 // Uncomment these to include any queries that this grammar contains
 
@@ -46,7 +60,7 @@ mod tests {
     fn test_can_load_grammar() {
         let mut parser = tree_sitter::Parser::new();
         parser
-            .set_language(super::language())
+            .set_language(super::language_rstml())
             .expect("Error loading rstml language");
     }
 }

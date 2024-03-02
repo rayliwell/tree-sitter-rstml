@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "description": "rstml grammar for tree-sitter",
   "main": "bindings/node",
-  "keywords": ["parser", "rust", "rstml"],
+  "keywords": [
+    "parser",
+    "rust",
+    "rstml"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rayliwell/tree-sitter-rstml.git"
@@ -11,19 +15,22 @@
   "author": "Ryan Halliwell <git@rayliwell.com>",
   "license": "MIT",
   "dependencies": {
-    "nan": "^2.17.0"
+    "nan": "^2.17.0",
+    "tree-sitter": "^0.20.6"
   },
   "devDependencies": {
     "node-gyp": "^10.0.1",
     "prettier": "^3.2.5",
     "tree-sitter-cli": "^0.20.8",
-    "tree-sitter-rust": "^0.20.4"
+    "tree-sitter-rust": "github:tree-sitter/tree-sitter-rust"
   },
   "scripts": {
-    "build": "npm run import-scanner && tree-sitter generate && node-gyp build",
-    "import-scanner": "mkdir -p src && cp node_modules/tree-sitter-rust/src/scanner.c src/scanner.c && sed -i 's/rust/rstml/g' src/scanner.c",
-    "build-wasm": "tree-sitter build-wasm",
-    "playground": "npm run build && npm run build-wasm && tree-sitter playground",
+    "build-rstml": "cd rstml && tree-sitter generate --no-bindings && cd .. && node-gyp build",
+    "build-wasm-rstml": "cd rstml && tree-sitter build-wasm",
+    "playground-rstml": "npm run build-rstml && npm run build-wasm-rstml && cd rstml && tree-sitter playground",
+    "build-rust-with-rstml": "cd rust_with_rstml && tree-sitter generate --no-bindings && cd .. && node-gyp build",
+    "build-wasm-rust-with-rstml": "cd rust_with_rstml && tree-sitter build-wasm",
+    "playground-rust-with-rstml": "npm run build-rust-with-rstml && npm run build-wasm-rust-with-rstml && cd rust_with_rstml && tree-sitter playground",
     "lint": "eslint grammar.js",
     "parse": "tree-sitter parse",
     "test": "tree-sitter test && script/parse-examples",

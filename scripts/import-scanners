@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sed 's/rust/rstml/g' node_modules/tree-sitter-rust/src/scanner.c > rstml/src/scanner.c
+
+sed 's/rust/rust_with_rstml/g' node_modules/tree-sitter-rust/src/scanner.c > rust_with_rstml/src/scanner.c
