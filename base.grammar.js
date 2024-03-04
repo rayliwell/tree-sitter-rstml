@@ -75,14 +75,9 @@ module.exports = {
       ),
 
     node_identifier: $ =>
-      sepBy1(
-        field('delimiter', $.node_identifier_delimiter),
-        $._node_identifier_part,
-      ),
+      sepBy1(choice(':', '::', '-'), $._node_identifier_part),
 
     _node_identifier_part: _ => /[a-zA-Z][0-9a-zA-Z]*/,
-
-    node_identifier_delimiter: _ => token.immediate(choice(':', '::', '-')),
 
     text_node: $ => /[^{}<>"\s]([^{}<>\n"]*[^{}<>"\s])?/,
   },

@@ -3074,18 +3074,7 @@
   {
     "type": "node_identifier",
     "named": true,
-    "fields": {
-      "delimiter": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "node_identifier_delimiter",
-            "named": true
-          }
-        ]
-      }
-    }
+    "fields": {}
   },
   {
     "type": "nodes",
@@ -5475,10 +5464,6 @@
   },
   {
     "type": "mutable_specifier",
-    "named": true
-  },
-  {
-    "type": "node_identifier_delimiter",
     "named": true
   },
   {
