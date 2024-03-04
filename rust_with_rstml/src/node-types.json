@@ -1551,16 +1551,6 @@
     "type": "element_node",
     "named": true,
     "fields": {
-      "children": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "nodes",
-            "named": true
-          }
-        ]
-      },
       "close_tag": {
         "multiple": false,
         "required": true,
@@ -1581,6 +1571,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "nodes",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2079,17 +2079,16 @@
   {
     "type": "fragment_node",
     "named": true,
-    "fields": {
-      "children": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "nodes",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "nodes",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2439,6 +2438,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "if_expression",
@@ -2798,8 +2802,12 @@
     },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "nodes",
+          "named": true
+        },
         {
           "type": "token_tree",
           "named": true
@@ -5402,10 +5410,6 @@
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
-  },
-  {
     "type": "if",
     "named": false
   },
@@ -5579,6 +5583,10 @@
   },
   {
     "type": "use",
+    "named": false
+  },
+  {
+    "type": "view",
     "named": false
   },
   {

@@ -29,7 +29,7 @@ module.exports = {
         $.block,
       ),
 
-    fragment_node: $ => seq('<>', field('children', optional($.nodes)), '</>'),
+    fragment_node: $ => seq('<>', optional($.nodes), '</>'),
 
     doctype_node: $ =>
       seq(
@@ -52,7 +52,7 @@ module.exports = {
     element_node: $ =>
       seq(
         field('open_tag', $.open_tag),
-        field('children', optional($.nodes)),
+        optional($.nodes),
         field('close_tag', $.close_tag),
       ),
 

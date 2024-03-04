@@ -5078,41 +5078,15 @@
       ]
     },
     "macro_invocation": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "FIELD",
-          "name": "macro",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "scoped_identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_reserved_identifier"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "_non_rstml_macro_invocation"
         },
         {
-          "type": "STRING",
-          "value": "!"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "delim_token_tree"
-          },
-          "named": true,
-          "value": "token_tree"
+          "type": "SYMBOL",
+          "name": "_rstml_macro_invocation"
         }
       ]
     },
@@ -9052,20 +9026,16 @@
           "value": "<>"
         },
         {
-          "type": "FIELD",
-          "name": "children",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "nodes"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "nodes"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -9188,20 +9158,16 @@
           }
         },
         {
-          "type": "FIELD",
-          "name": "children",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "nodes"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "nodes"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -9379,6 +9345,97 @@
     "text_node": {
       "type": "PATTERN",
       "value": "[^{}<>\"\\s]([^{}<>\\n\"]*[^{}<>\"\\s])?"
+    },
+    "_non_rstml_macro_invocation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "macro",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "scoped_identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_reserved_identifier"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "!"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "delim_token_tree"
+          },
+          "named": true,
+          "value": "token_tree"
+        }
+      ]
+    },
+    "_rstml_macro_invocation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "macro",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "rstml_macro_identifier"
+            },
+            "named": true,
+            "value": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "!"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_delim_nodes"
+        }
+      ]
+    },
+    "rstml_macro_identifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "view"
+        }
+      ]
+    },
+    "_delim_nodes": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "nodes"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
     }
   },
   "extras": [
