@@ -9261,8 +9261,17 @@
     "node_attributes": {
       "type": "REPEAT1",
       "content": {
-        "type": "SYMBOL",
-        "name": "node_attribute"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "node_attribute"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "block"
+          }
+        ]
       }
     },
     "node_attribute": {

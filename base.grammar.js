@@ -66,7 +66,7 @@ module.exports = {
 
     close_tag: $ => seq('</', field('name', $.node_identifier), '>'),
 
-    node_attributes: $ => repeat1($.node_attribute),
+    node_attributes: $ => repeat1(choice($.node_attribute, $.block)),
 
     node_attribute: $ =>
       seq(

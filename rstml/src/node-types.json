@@ -3056,6 +3056,10 @@
       "required": true,
       "types": [
         {
+          "type": "block",
+          "named": true
+        },
+        {
           "type": "node_attribute",
           "named": true
         }
