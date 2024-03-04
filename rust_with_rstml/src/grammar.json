@@ -9129,8 +9129,16 @@
           "type": "FIELD",
           "name": "attributes",
           "content": {
-            "type": "SYMBOL",
-            "name": "node_attributes"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "node_attributes"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         },
         {

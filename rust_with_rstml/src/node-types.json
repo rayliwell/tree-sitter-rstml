@@ -3712,7 +3712,7 @@
     "fields": {
       "attributes": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "node_attributes",

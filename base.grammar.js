@@ -45,7 +45,7 @@ module.exports = {
       seq(
         '<',
         choice(field('name', $.node_identifier), $.block),
-        field('attributes', $.node_attributes),
+        field('attributes', optional($.node_attributes)),
         token(prec(1, '/>')),
       ),
 
