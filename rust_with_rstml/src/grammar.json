@@ -9434,8 +9434,16 @@
           "value": "{"
         },
         {
-          "type": "SYMBOL",
-          "name": "nodes"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "nodes"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
