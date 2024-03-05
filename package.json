@@ -3,11 +3,7 @@
   "version": "0.0.1",
   "description": "rstml grammar for tree-sitter",
   "main": "bindings/node",
-  "keywords": [
-    "parser",
-    "rust",
-    "rstml"
-  ],
+  "keywords": ["parser", "rust", "rstml"],
   "repository": {
     "type": "git",
     "url": "https://github.com/rayliwell/tree-sitter-rstml.git"
@@ -19,21 +15,20 @@
     "tree-sitter": "^0.20.6"
   },
   "devDependencies": {
-    "node-gyp": "^10.0.1",
     "prettier": "^3.2.5",
     "tree-sitter-cli": "^0.20.8",
     "tree-sitter-rust": "github:tree-sitter/tree-sitter-rust"
   },
   "scripts": {
-    "build-rstml": "cd rstml && tree-sitter generate --no-bindings && cd .. && node-gyp build",
+    "build": "npm run build-rstml && npm run build-rust-with-rstml",
+    "test": "npm run test-rstml && npm run test-rust-with-rstml",
+    "build-rstml": "cd rstml && tree-sitter generate --no-bindings",
+    "test-rstml": "cd rstml && tree-sitter test",
     "build-wasm-rstml": "cd rstml && tree-sitter build-wasm",
     "playground-rstml": "npm run build-rstml && npm run build-wasm-rstml && cd rstml && tree-sitter playground",
-    "build-rust-with-rstml": "cd rust_with_rstml && tree-sitter generate --no-bindings && cd .. && node-gyp build",
+    "build-rust-with-rstml": "cd rust_with_rstml && tree-sitter generate --no-bindings",
+    "test-rust-with-rstml": "cd rust_with_rstml && tree-sitter test",
     "build-wasm-rust-with-rstml": "cd rust_with_rstml && tree-sitter build-wasm",
-    "playground-rust-with-rstml": "npm run build-rust-with-rstml && npm run build-wasm-rust-with-rstml && cd rust_with_rstml && tree-sitter playground",
-    "lint": "eslint grammar.js",
-    "parse": "tree-sitter parse",
-    "test": "tree-sitter test && script/parse-examples",
-    "test-windows": "tree-sitter test"
+    "playground-rust-with-rstml": "npm run build-rust-with-rstml && npm run build-wasm-rust-with-rstml && cd rust_with_rstml && tree-sitter playground"
   }
 }

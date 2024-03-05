@@ -1,0 +1,37 @@
+==================================
+View macro invocation
+==================================
+
+view! {
+  <div />
+}
+
+---
+
+(source_file
+  (macro_invocation
+    (identifier)
+    (nodes
+      (self_closing_element_node
+        (node_identifier)))))
+
+==================================
+Rust statement
+==================================
+
+fn main() {
+   println!("Hello, world!");
+}
+
+---
+
+(source_file
+  (function_item
+    (identifier)
+    (parameters)
+    (block
+      (expression_statement
+        (macro_invocation
+          (identifier)
+          (token_tree
+            (string_literal)))))))

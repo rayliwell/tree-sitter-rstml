@@ -1,0 +1,283 @@
+==================================
+Self-closing element node
+==================================
+
+<div />
+
+---
+
+(source_file
+  (nodes
+    (self_closing_element_node
+      (node_identifier))))
+
+==================================
+Element node
+==================================
+
+<div>
+  <div />
+  <div />
+</div>
+
+---
+
+(source_file
+  (nodes
+    (element_node
+      (open_tag
+        (node_identifier))
+      (nodes
+        (self_closing_element_node
+          (node_identifier))
+        (self_closing_element_node
+          (node_identifier)))
+      (close_tag
+        (node_identifier)))))
+
+==================================
+Fragment node
+==================================
+
+<>
+  <div />
+</>
+
+---
+
+(source_file
+  (nodes
+    (fragment_node
+      (nodes
+        (self_closing_element_node
+          (node_identifier))))))
+
+==================================
+Unquoted text node
+==================================
+
+<div>
+  Hello, world!
+</div>
+
+---
+
+(source_file
+  (nodes
+    (element_node
+      (open_tag
+        (node_identifier))
+      (nodes
+        (text_node))
+      (close_tag
+        (node_identifier)))))
+
+==================================
+String literal
+==================================
+
+<div>
+  "Hello, world!"
+</div>
+
+---
+
+(source_file
+  (nodes
+    (element_node
+      (open_tag
+        (node_identifier))
+      (nodes
+        (string_literal))
+      (close_tag
+        (node_identifier)))))
+
+==================================
+Doctype node
+==================================
+
+<!DOCTYPE html>
+<!doctype HTML>
+<!DoCtYpE HtML>
+<!DOCTYPE the text in here shouldn't matter>
+
+---
+
+(source_file
+  (nodes
+    (doctype_node)
+    (doctype_node)
+    (doctype_node)
+    (doctype_node)))
+
+==================================
+Comment node
+==================================
+
+<!--This is a comment-->
+
+<!--
+Any text can be in here.
+
+Even tags...
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <p>Hello, world</p>
+  </body>
+</html>
+
+And blocks...
+{ let hello_world = "Hello, world"; }
+-->
+
+---
+
+(source_file
+  (nodes
+    (comment_node)
+    (comment_node)))
+
+==================================
+Delimiters in names
+==================================
+
+<long-tag-name />
+<long:tag:name />
+<long::tag::name />
+
+---
+
+(source_file
+  (nodes
+    (self_closing_element_node
+      (node_identifier))
+    (self_closing_element_node
+      (node_identifier))
+    (self_closing_element_node
+      (node_identifier))))
+
+==================================
+Attributes
+==================================
+
+<delimiters attribute-name attribute:name attribute::name />
+<values string="Hello, world" true false=false number=0 call=function::call() />
+<closures numbers=move |_| x * x * x * x reactive=move |_| count() />
+<conditional value=if computation() { "true" } else { "false" } />
+
+---
+
+(source_file
+  (nodes
+    (self_closing_element_node
+      (node_identifier)
+      (node_attributes
+        (node_attribute
+          (node_identifier))
+        (node_attribute
+          (node_identifier))
+        (node_attribute
+          (node_identifier))))
+    (self_closing_element_node
+      (node_identifier)
+      (node_attributes
+        (node_attribute
+          (node_identifier)
+          (string_literal))
+        (node_attribute
+          (node_identifier))
+        (node_attribute
+          (node_identifier)
+          (boolean_literal))
+        (node_attribute
+          (node_identifier)
+          (integer_literal))
+        (node_attribute
+          (node_identifier)
+          (call_expression
+            (scoped_identifier
+              (identifier)
+              (identifier))
+            (arguments)))))
+    (self_closing_element_node
+      (node_identifier)
+      (node_attributes
+        (node_attribute
+          (node_identifier)
+          (closure_expression
+            (closure_parameters)
+            (binary_expression
+              (binary_expression
+                (binary_expression
+                  (identifier)
+                  (identifier))
+                (identifier))
+              (identifier))))
+        (node_attribute
+          (node_identifier)
+          (closure_expression
+            (closure_parameters)
+            (call_expression
+              (identifier)
+              (arguments))))))
+    (self_closing_element_node
+      (node_identifier)
+      (node_attributes
+        (node_attribute
+          (node_identifier)
+          (if_expression
+            (call_expression
+              (identifier)
+              (arguments))
+            (block
+              (string_literal))
+            (else_clause
+              (block
+                (string_literal)))))))))
+
+==================================
+Block expressions
+==================================
+
+<{ let block = "In node name position"; } />
+<div>{ let block = "In node position"; }</div>
+<div { let block = "In attribute position"; } />
+<div key={ let block = "In attribute value position"; } />
+
+---
+
+(source_file
+  (nodes
+    (self_closing_element_node
+      (block
+        (let_declaration
+          (identifier)
+          (string_literal))))
+    (element_node
+      (open_tag
+        (node_identifier))
+      (nodes
+        (block
+          (let_declaration
+            (identifier)
+            (string_literal))))
+      (close_tag
+        (node_identifier)))
+    (self_closing_element_node
+      (node_identifier)
+      (node_attributes
+        (block
+          (let_declaration
+            (identifier)
+            (string_literal)))))
+    (self_closing_element_node
+      (node_identifier)
+      (node_attributes
+        (node_attribute
+          (node_identifier)
+          (block
+            (let_declaration
+              (identifier)
+              (string_literal))))))))
