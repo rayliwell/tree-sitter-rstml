@@ -9412,8 +9412,13 @@
           "value": "!"
         },
         {
-          "type": "SYMBOL",
-          "name": "_delim_nodes"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_delim_nodes"
+          },
+          "named": true,
+          "value": "nodes"
         }
       ]
     },
@@ -9437,8 +9442,13 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "nodes"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "nodes"
+              },
+              "named": true,
+              "value": "_nodes"
             },
             {
               "type": "BLANK"
