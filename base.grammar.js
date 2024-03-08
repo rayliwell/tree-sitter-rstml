@@ -39,7 +39,7 @@ module.exports = {
         token(prec(1, '>')),
       ),
 
-    comment_node: $ => seq('<!--', repeat(/./), token(prec(1, '-->'))),
+    comment_node: $ => seq('<!--', $.string_literal, token(prec(1, '-->'))),
 
     self_closing_element_node: $ =>
       seq(

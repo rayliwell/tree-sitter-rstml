@@ -9082,11 +9082,8 @@
           "value": "<!--"
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "PATTERN",
-            "value": "."
-          }
+          "type": "SYMBOL",
+          "name": "string_literal"
         },
         {
           "type": "TOKEN",
