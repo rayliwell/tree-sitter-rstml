@@ -1,5 +1,4 @@
 fn main() {
-    let root_dir = Path::new(".");
     let rstml_dir = std::path::Path::new("rstml/src");
     let rust_with_rstml_dir = std::path::Path::new("rust_with_rstml/src");
 
@@ -17,7 +16,7 @@ fn main() {
         rust_with_rstml_dir.join("parser.c"),
         rust_with_rstml_dir.join("scanner.c"),
     ] {
-        config.file(&path);
+        c_config.file(&path);
         println!("cargo:rerun-if-changed={}", path.to_str().unwrap());
     }
 

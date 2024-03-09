@@ -22,30 +22,30 @@ extern "C" {
     fn tree_sitter_rust_with_rstml() -> Language;
 }
 
-/// Get the tree-sitter [Language][] for this grammar.
+/// The tree-sitter [Language][] for the rstml grammar.
 ///
 /// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
 pub fn language_rstml() -> Language {
     unsafe { tree_sitter_rstml() }
 }
 
-/// Get the tree-sitter [Language][] for this grammar.
+/// The tree-sitter [Language][] for the rust_with_rstml grammar.
 ///
 /// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
 pub fn language_rust_with_rstml() -> Language {
     unsafe { tree_sitter_rust_with_rstml() }
 }
 
-/// The content of the [`node-types.json`][] file for this grammar.
+/// The content of the [`node-types.json`][] file for the rstml grammar.
 ///
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
-pub const RSTML_NODE_TYPES: &'static str = include_str!("../../standalone/src/node-types.json");
+pub const RSTML_NODE_TYPES: &'static str = include_str!("../../rstml/src/node-types.json");
 
-/// The content of the [`node-types.json`][] file for this grammar.
+/// The content of the [`node-types.json`][] file for the rust_with_rstml grammar.
 ///
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
 pub const RUST_WITH_RSTML_NODE_TYPES: &'static str =
-    include_str!("../../standalone/src/node-types.json");
+    include_str!("../../rust_with_rstml/src/node-types.json");
 
 // Uncomment these to include any queries that this grammar contains
 
