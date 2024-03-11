@@ -26,6 +26,7 @@ module.exports = {
         $.fragment_node,
         $.doctype_node,
         $.comment_node,
+        $.raw_string_literal,
         $.string_literal,
         $.text_node,
       ),
@@ -40,7 +41,12 @@ module.exports = {
         token(prec(1, '>')),
       ),
 
-    comment_node: $ => seq('<!--', $.string_literal, token(prec(1, '-->'))),
+    comment_node: $ =>
+      seq(
+        '<!--',
+        choice($.raw_string_literal, $.string_literal),
+        token(prec(1, '-->')),
+      ),
 
     self_closing_element_node: $ =>
       seq(

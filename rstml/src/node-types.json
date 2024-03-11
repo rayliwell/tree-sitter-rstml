@@ -1272,6 +1272,10 @@
       "required": true,
       "types": [
         {
+          "type": "raw_string_literal",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         }
@@ -3118,6 +3122,10 @@
         },
         {
           "type": "fragment_node",
+          "named": true
+        },
+        {
+          "type": "raw_string_literal",
           "named": true
         },
         {
