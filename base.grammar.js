@@ -17,7 +17,9 @@ module.exports = {
 
     nodes: $ => prec.dynamic(1, repeat1($._node)),
 
-    _node: $ =>
+    _node: $ => choice($._node_except_block, alias($.block, $.rust_block)),
+
+    _node_except_block: $ =>
       choice(
         $.element_node,
         $.self_closing_element_node,
@@ -26,7 +28,6 @@ module.exports = {
         $.comment_node,
         $.string_literal,
         $.text_node,
-        $.block,
       ),
 
     fragment_node: $ => seq('<>', optional($.nodes), '</>'),
@@ -71,7 +72,9 @@ module.exports = {
     node_attribute: $ =>
       seq(
         field('name', $.node_identifier),
-        optional(seq('=', field('value', $._expression))),
+        optional(
+          seq('=', field('value', alias($._expression, $.rust_expression))),
+        ),
       ),
 
     node_identifier: $ =>

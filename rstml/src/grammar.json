@@ -3,8 +3,25 @@
   "word": "identifier",
   "rules": {
     "source_file": {
-      "type": "SYMBOL",
-      "name": "nodes"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "delim_nodes"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "REPEAT1",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_node_except_block"
+            }
+          },
+          "named": true,
+          "value": "nodes"
+        }
+      ]
     },
     "_statement": {
       "type": "CHOICE",
@@ -8992,6 +9009,24 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "_node_except_block"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "block"
+          },
+          "named": true,
+          "value": "rust_block"
+        }
+      ]
+    },
+    "_node_except_block": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
           "name": "element_node"
         },
         {
@@ -9017,10 +9052,6 @@
         {
           "type": "SYMBOL",
           "name": "text_node"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "block"
         }
       ]
     },
@@ -9296,8 +9327,13 @@
                   "type": "FIELD",
                   "name": "value",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "_expression"
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_expression"
+                    },
+                    "named": true,
+                    "value": "rust_expression"
                   }
                 }
               ]
@@ -9354,6 +9390,23 @@
     "text_node": {
       "type": "PATTERN",
       "value": "[^{}<>\"\\s]([^{}<>\\n\"]*[^{}<>\"\\s])?"
+    },
+    "delim_nodes": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "nodes"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
     }
   },
   "extras": [

@@ -8986,6 +8986,24 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "_node_except_block"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "block"
+          },
+          "named": true,
+          "value": "rust_block"
+        }
+      ]
+    },
+    "_node_except_block": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
           "name": "element_node"
         },
         {
@@ -9011,10 +9029,6 @@
         {
           "type": "SYMBOL",
           "name": "text_node"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "block"
         }
       ]
     },
@@ -9290,8 +9304,13 @@
                   "type": "FIELD",
                   "name": "value",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "_expression"
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_expression"
+                    },
+                    "named": true,
+                    "value": "rust_expression"
                   }
                 }
               ]

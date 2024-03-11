@@ -8,6 +8,9 @@ module.exports = grammar({
   rules: {
     ...baseGrammar.rules,
 
-    source_file: $ => $.nodes,
+    source_file: $ =>
+      choice($.delim_nodes, alias(repeat1($._node_except_block), $.nodes)),
+
+    delim_nodes: $ => seq('{', $.nodes, '}'),
   },
 })
