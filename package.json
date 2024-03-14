@@ -1,7 +1,7 @@
 {
   "name": "tree-sitter-rstml",
   "version": "0.0.1",
-  "description": "rstml grammar for tree-sitter",
+  "description": "Rust + html grammar for the tree-sitter parser library.",
   "main": "bindings/node",
   "keywords": ["parser", "rust", "rstml"],
   "repository": {

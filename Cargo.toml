@@ -1,6 +1,6 @@
 [package]
 name = "tree-sitter-rstml"
-description = "rstml grammar for the tree-sitter parsing library"
+description = "Rust + html grammar for the tree-sitter parser library."
 authors = ["Ryan Halliwell <git@rayliwell.com>"]
 version = "0.0.1"
 keywords = ["incremental", "parsing", "rstml"]
