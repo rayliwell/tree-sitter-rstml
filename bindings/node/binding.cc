@@ -26,9 +26,9 @@ void Init(Local<Object> exports, Local<Object> module) {
   Local<Function> rust_with_rstml_constructor = Nan::GetFunction(rust_with_rstml_tpl).ToLocalChecked();
   Local<Object> rust_with_rstml_instance = rust_with_rstml_constructor->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
   Nan::SetInternalFieldPointer(rust_with_rstml_instance, 0, tree_sitter_rust_with_rstml());
-  Nan::Set(rust_with_rstml_instance, Nan::New("name").ToLocalChecked(), Nan::New("rustWithRstml").ToLocalChecked());
+  Nan::Set(rust_with_rstml_instance, Nan::New("name").ToLocalChecked(), Nan::New("rust_with_rstml").ToLocalChecked());
 
-  Nan::Set(exports, Nan::New("rustWithRstml").ToLocalChecked(), rust_with_rstml_instance);
+  Nan::Set(exports, Nan::New("rust_with_rstml").ToLocalChecked(), rust_with_rstml_instance);
   Nan::Set(exports, Nan::New("rstml").ToLocalChecked(), rstml_instance);
 }
 

@@ -16,5 +16,5 @@ try {
 
 try {
   module.exports.rstml.nodeTypeInfo = require('../../rstml/src/node-types.json')
-  module.exports.rustWithRstml.nodeTypeInfo = require('../../rust_with_rstml/src/node-types.json')
+  module.exports.rust_with_rstml.nodeTypeInfo = require('../../rust_with_rstml/src/node-types.json')
 } catch (_) {}
