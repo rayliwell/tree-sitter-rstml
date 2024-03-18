@@ -460,53 +460,6 @@
     ]
   },
   {
-    "type": "_nodes",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "comment_node",
-          "named": true
-        },
-        {
-          "type": "doctype_node",
-          "named": true
-        },
-        {
-          "type": "element_node",
-          "named": true
-        },
-        {
-          "type": "fragment_node",
-          "named": true
-        },
-        {
-          "type": "raw_string_literal",
-          "named": true
-        },
-        {
-          "type": "rust_block",
-          "named": true
-        },
-        {
-          "type": "self_closing_element_node",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "text_node",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "abstract_type",
     "named": true,
     "fields": {
@@ -3143,16 +3096,12 @@
   },
   {
     "type": "nodes",
-    "named": true,
+    "named": false,
     "fields": {},
     "children": {
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "_nodes",
-          "named": true
-        },
         {
           "type": "comment_node",
           "named": true
