@@ -71,8 +71,8 @@ let tree = parser.parse(code, None).unwrap();
 <pre lang="js">
 const Parser = require('tree-sitter')
 const code = '&lt;div&gt;Hello, world&lt;/div&gt;'
-const parser = new Parser(require('tree-sitter-rstml').rstml)
-parser.setLanguage(rstml)
+const parser = new Parser()
+parser.setLanguage(require('tree-sitter-rstml').rstml)
 const tree = parser.parse(code)
 </pre>
 </details>
@@ -86,8 +86,8 @@ const code = `
         &lt;div&gt;Hello, world&lt;/div&gt;
     }
 `
-const parser = new Parser(require('tree-sitter-rstml').rust_with_rstml)
-parser.setLanguage(rstml)
+const parser = new Parser()
+parser.setLanguage(require('tree-sitter-rstml').rust_with_rstml)
 const tree = parser.parse(code)
 </pre>
 </details>
