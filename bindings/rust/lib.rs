@@ -31,12 +31,8 @@ pub const RSTML_NODE_TYPES: &'static str = include_str!("../../rstml/src/node-ty
 pub const RUST_WITH_RSTML_NODE_TYPES: &'static str =
     include_str!("../../rust_with_rstml/src/node-types.json");
 
-// Uncomment these to include any queries that this grammar contains
-
-// pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlights.scm");
-// pub const INJECTIONS_QUERY: &'static str = include_str!("../../queries/injections.scm");
-// pub const LOCALS_QUERY: &'static str = include_str!("../../queries/locals.scm");
-// pub const TAGS_QUERY: &'static str = include_str!("../../queries/tags.scm");
+pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlights.scm");
+pub const INJECTIONS_QUERY: &'static str = include_str!("../../queries/injections.scm");
 
 #[cfg(test)]
 mod tests {

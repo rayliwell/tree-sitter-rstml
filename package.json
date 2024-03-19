@@ -30,5 +30,20 @@
     "test-rust-with-rstml": "cd rust_with_rstml && tree-sitter test",
     "build-wasm-rust-with-rstml": "cd rust_with_rstml && tree-sitter build-wasm",
     "playground-rust-with-rstml": "npm run build-rust-with-rstml && npm run build-wasm-rust-with-rstml && cd rust_with_rstml && tree-sitter playground"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.rust.rstml",
+      "path": "rstml",
+      "highlights": ["queries/highlights.scm"]
+    },
+    {
+      "scope": "source.rust.rust_with_rstml",
+      "path": "rust_with_rstml",
+      "file-types": ["rs"],
+      "content-regex": "view!",
+      "highlights": ["queries/highlights.scm"],
+      "injections": ["queries/injections.scm"]
+    }
+  ]
 }
