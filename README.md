@@ -1,5 +1,12 @@
 # tree-sitter-rstml
 
+[![GitHub License](https://img.shields.io/github/license/rayliwell/tree-sitter-rstml?color=purple)](https://github.com/rayliwell/tree-sitter-rstml/blob/main/LICENSE)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/rayliwell/tree-sitter-rstml/main)](https://github.com/rayliwell/tree-sitter-rstml/commits/main/)
+[![GitHub Tag](https://img.shields.io/github/v/tag/rayliwell/tree-sitter-rstml?label=version)](https://github.com/rayliwell/tree-sitter-rstml/tags)
+[![NPM Version](https://img.shields.io/npm/v/tree-sitter-rstml?style=flat&logo=npm&color=blue)](https://www.npmjs.com/package/tree-sitter-rstml)
+[![Crates.io Version](https://img.shields.io/crates/v/tree-sitter-rstml?logo=rust&color=blue)](https://crates.io/crates/tree-sitter-rstml)
+[![docs.rs](https://img.shields.io/docsrs/tree-sitter-rust)](https://docs.rs/tree-sitter-rstml/latest/tree_sitter_rstml/)
+
 Rust + html grammar for the [tree-sitter](https://github.com/tree-sitter/tree-sitter) parser library.
 
 Rust web frameworks, like [Leptos](https://github.com/leptos-rs/leptos), rely on JSX-style templates embedded inside Rust code using the [rstml](https://github.com/rs-tml/rstml) library. This project enables the parsing of those templates for various purposes, such as syntax highlighting in text editors.
