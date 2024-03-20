@@ -107,6 +107,41 @@ const tree = parser.parse(code)
     </tr>
 </table>
 
+## Editor support
+
+### Neovim (experimental)
+
+Neovim's [tree-sitter integration](https://neovim.io/doc/user/treesitter.html) supports syntax highlighting, indentation, and code folding.
+
+| Without `rstml` highlighting                                                                        | With `rstml` highlighting                                                                          |
+|-----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| ![before](/assets/neovim_before_highlighting.png) | ![after](/assets/neovim_after_highlighting.png) |
+
+To test the experimental Neovim support, [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) users should:
+
+- Replace `"nvim-treesitter/nvim-treesitter"` with `"rayliwell/nvim-treesitter"` in your package manager's config.
+- Add `"rstml"` to `ensure_installed` in `nvim-treesitter.configs.setup`.
+- Run the update command of your preferred Neovim package manager and run `:TSUpdate`.
+
+Here's an example config using [lazy.nvim](https://github.com/folke/lazy.nvim):
+
+```lua
+require("lazy").setup({{
+    "rayliwell/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function ()
+        local configs = require("nvim-treesitter.configs")
+
+        configs.setup({
+            ensure_installed = { "rust", "rstml" },
+            sync_install = false,
+            highlight = { enable = true },
+            indent = { enable = true },
+        })
+    end
+}})
+```
+
 ## Acknowledgements
 
 This project extends and heavily relies upon the [tree-sitter-rust](https://github.com/tree-sitter/tree-sitter-rust) grammar. It would not be possible without its [contributors](https://github.com/tree-sitter/tree-sitter-rust/graphs/contributors), as well as those who have [contributed](https://github.com/tree-sitter/tree-sitter/graphs/contributors) to the wider tree-sitter ecosystem.
