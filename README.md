@@ -6,7 +6,7 @@ Rust web frameworks, like [Leptos](https://github.com/leptos-rs/leptos), rely on
 
 ## Usage
 
-Since rstml isn't a supposed to be a standalone language, this project defines two grammars for convenience:
+Since rstml isn't a supposed to be a standalone language, there are two grammars defined for convenience:
 
 <table>
     <tr>
@@ -36,6 +36,11 @@ view! {
     &lt;div&gt;Hello, world&lt;/div&gt;
 }</pre>
         </td>
+    </tr>
+    <tr>
+        <td>Parser location</td>
+        <td><code>rstml/src</code></td>
+        <td><code>rust_with_rstml/src</code></td>
     </tr>
     <tr>
         <td>Rust binding usage</td>
@@ -94,3 +99,15 @@ const tree = parser.parse(code)
        </td>
     </tr>
 </table>
+
+## Acknowledgements
+
+This project extends and heavily relies upon the [tree-sitter-rust](https://github.com/tree-sitter/tree-sitter-rust) grammar. It would not be possible without its [contributors](https://github.com/tree-sitter/tree-sitter-rust/graphs/contributors), as well as those who have [contributed](https://github.com/tree-sitter/tree-sitter/graphs/contributors) to the wider tree-sitter ecosystem.
+
+Additionally, this project is based on the work of the [rstml](https://github.com/rs-tml/rstml) library. Originating as a fork of [syn-rsx](https://github.com/stoically/syn-rsx), whose creator, unfortunately, has [passed away](https://github.com/stoically/temporary-containers/issues/618).
+
+## License
+
+Licensed under the [MIT License](https://mit-license.org/).
+
+Copyright © 2024 Ryan Halliwell
