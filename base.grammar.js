@@ -51,7 +51,10 @@ module.exports = {
     self_closing_element_node: $ =>
       seq(
         '<',
-        choice(field('name', $.node_identifier), $.block),
+        choice(
+          field('name', choice($.node_identifier, $.generic_identifier)),
+          $.block,
+        ),
         field('attributes', optional($.node_attributes)),
         token(prec(1, '/>')),
       ),
@@ -85,6 +88,9 @@ module.exports = {
 
     node_identifier: $ =>
       sepBy1(choice(':', '::', '-'), $._node_identifier_part),
+
+    generic_identifier: $ =>
+      seq($.node_identifier, seq('<', alias($._type, $.rust_type), '>')),
 
     _node_identifier_part: _ => /[\p{XID_Start}_][\p{XID_Continue}_]*/,
 

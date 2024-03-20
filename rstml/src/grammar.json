@@ -9162,8 +9162,17 @@
               "type": "FIELD",
               "name": "name",
               "content": {
-                "type": "SYMBOL",
-                "name": "node_identifier"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "node_identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "generic_identifier"
+                  }
+                ]
               }
             },
             {
@@ -9393,6 +9402,37 @@
               }
             ]
           }
+        }
+      ]
+    },
+    "generic_identifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "node_identifier"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "<"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_type"
+              },
+              "named": true,
+              "value": "rust_type"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
         }
       ]
     },

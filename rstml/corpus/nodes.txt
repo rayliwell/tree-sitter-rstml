@@ -291,3 +291,36 @@ Block expressions
               (let_declaration
                 (identifier)
                 (string_literal)))))))))
+
+==================================
+Generics in self-closing nodes
+==================================
+
+<Component<Type> />
+<qualified::Component<qualified::Type> />
+<Component<Generic<Type>> />
+
+---
+
+(source_file
+  (nodes
+    (self_closing_element_node
+      (generic_identifier
+        (node_identifier)
+        (rust_type
+          (type_identifier))))
+    (self_closing_element_node
+      (generic_identifier
+        (node_identifier)
+        (rust_type
+          (scoped_type_identifier
+            (identifier)
+            (type_identifier)))))
+    (self_closing_element_node
+      (generic_identifier
+        (node_identifier)
+        (rust_type
+          (generic_type
+            (type_identifier)
+            (type_arguments
+              (type_identifier))))))))
