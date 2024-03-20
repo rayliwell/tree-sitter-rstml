@@ -9398,7 +9398,7 @@
     },
     "_node_identifier_part": {
       "type": "PATTERN",
-      "value": "[a-zA-Z][0-9a-zA-Z]*"
+      "value": "[\\p{XID_Start}_][\\p{XID_Continue}_]*"
     },
     "text_node": {
       "type": "PATTERN",

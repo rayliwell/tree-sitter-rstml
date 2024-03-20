@@ -86,7 +86,7 @@ module.exports = {
     node_identifier: $ =>
       sepBy1(choice(':', '::', '-'), $._node_identifier_part),
 
-    _node_identifier_part: _ => /[a-zA-Z][0-9a-zA-Z]*/,
+    _node_identifier_part: _ => /[\p{XID_Start}_][\p{XID_Continue}_]*/,
 
     text_node: $ => /[^{}<>"\s]([^{}<>\n"]*[^{}<>"\s])?/,
   },
