@@ -3098,11 +3098,11 @@
       "required": true,
       "types": [
         {
-          "type": "block",
+          "type": "node_attribute",
           "named": true
         },
         {
-          "type": "node_attribute",
+          "type": "rust_block",
           "named": true
         }
       ]
@@ -3115,7 +3115,7 @@
   },
   {
     "type": "nodes",
-    "named": true,
+    "named": false,
     "fields": {},
     "children": {
       "multiple": true,
@@ -3797,7 +3797,7 @@
       "required": false,
       "types": [
         {
-          "type": "block",
+          "type": "rust_block",
           "named": true
         }
       ]

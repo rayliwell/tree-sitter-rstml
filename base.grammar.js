@@ -53,7 +53,7 @@ module.exports = {
         '<',
         choice(
           field('name', choice($.node_identifier, $.generic_identifier)),
-          $.block,
+          alias($.block, $.rust_block),
         ),
         field('attributes', optional($.node_attributes)),
         token(prec(1, '/>')),
@@ -76,7 +76,8 @@ module.exports = {
 
     close_tag: $ => seq('</', field('name', $.node_identifier), '>'),
 
-    node_attributes: $ => repeat1(choice($.node_attribute, $.block)),
+    node_attributes: $ =>
+      repeat1(choice($.node_attribute, alias($.block, $.rust_block))),
 
     node_attribute: $ =>
       seq(

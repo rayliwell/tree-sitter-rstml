@@ -260,7 +260,7 @@ Block expressions
 (source_file
   (nodes
     (self_closing_element_node
-      (block
+      (rust_block
         (let_declaration
           (identifier)
           (string_literal))))
@@ -277,7 +277,7 @@ Block expressions
     (self_closing_element_node
       (node_identifier)
       (node_attributes
-        (block
+        (rust_block
           (let_declaration
             (identifier)
             (string_literal)))))

@@ -9153,8 +9153,13 @@
               }
             },
             {
-              "type": "SYMBOL",
-              "name": "block"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "block"
+              },
+              "named": true,
+              "value": "rust_block"
             }
           ]
         },
@@ -9295,8 +9300,13 @@
             "name": "node_attribute"
           },
           {
-            "type": "SYMBOL",
-            "name": "block"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "block"
+            },
+            "named": true,
+            "value": "rust_block"
           }
         ]
       }
