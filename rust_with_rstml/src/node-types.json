@@ -2835,7 +2835,7 @@
     },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "nodes",
@@ -3115,11 +3115,11 @@
   },
   {
     "type": "nodes",
-    "named": false,
+    "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "comment_node",
