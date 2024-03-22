@@ -1503,6 +1503,21 @@
     }
   },
   {
+    "type": "delim_nodes",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "nodes",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "doc_comment",
     "named": true,
     "fields": {
@@ -2835,10 +2850,10 @@
     },
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "nodes",
+          "type": "delim_nodes",
           "named": true
         },
         {

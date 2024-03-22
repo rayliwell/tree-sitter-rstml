@@ -25,9 +25,11 @@ module.exports = grammar({
       seq(
         field('macro', alias($.rstml_macro_identifier, $.identifier)),
         '!',
-        seq('{', optional($.nodes), '}'),
+        $.delim_nodes,
       ),
 
     rstml_macro_identifier: _ => choice('view'),
+
+    delim_nodes: $ => seq('{', optional($.nodes), '}'),
   },
 })
