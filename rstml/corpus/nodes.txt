@@ -9,7 +9,8 @@ Self-closing element node
 (source_file
   (nodes
     (self_closing_element_node
-      (node_identifier))))
+      (node_identifier
+        (identifier)))))
 
 ==================================
 Element node
@@ -26,14 +27,18 @@ Element node
   (nodes
     (element_node
       (open_tag
-        (node_identifier))
+        (node_identifier
+          (identifier)))
       (nodes
         (self_closing_element_node
-          (node_identifier))
+          (node_identifier
+            (identifier)))
         (self_closing_element_node
-          (node_identifier)))
+          (node_identifier
+            (identifier))))
       (close_tag
-        (node_identifier)))))
+        (node_identifier
+          (identifier))))))
 
 ==================================
 Fragment node
@@ -50,7 +55,8 @@ Fragment node
     (fragment_node
       (nodes
         (self_closing_element_node
-          (node_identifier))))))
+          (node_identifier
+            (identifier)))))))
 
 ==================================
 Unquoted text node
@@ -66,11 +72,13 @@ Unquoted text node
   (nodes
     (element_node
       (open_tag
-        (node_identifier))
+        (node_identifier
+          (identifier)))
       (nodes
         (text_node))
       (close_tag
-        (node_identifier)))))
+        (node_identifier
+          (identifier))))))
 
 ==================================
 String literal
@@ -86,11 +94,13 @@ String literal
   (nodes
     (element_node
       (open_tag
-        (node_identifier))
+        (node_identifier
+          (identifier)))
       (nodes
         (string_literal))
       (close_tag
-        (node_identifier)))))
+        (node_identifier
+          (identifier))))))
 
 ==================================
 Doctype node
@@ -154,11 +164,20 @@ Delimiters in names
 (source_file
   (nodes
     (self_closing_element_node
-      (node_identifier))
+      (node_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
     (self_closing_element_node
-      (node_identifier))
+      (node_identifier
+        (identifier)
+        (identifier)
+        (identifier)))
     (self_closing_element_node
-      (node_identifier))))
+      (node_identifier
+        (identifier)
+        (identifier)
+        (identifier)))))
 
 ==================================
 Attributes
@@ -174,33 +193,46 @@ Attributes
 (source_file
   (nodes
     (self_closing_element_node
-      (node_identifier)
+      (node_identifier
+        (identifier))
       (node_attributes
         (node_attribute
-          (node_identifier))
+          (node_identifier
+            (identifier)
+            (identifier)))
         (node_attribute
-          (node_identifier))
+          (node_identifier
+            (identifier)
+            (identifier)))
         (node_attribute
-          (node_identifier))))
+          (node_identifier
+            (identifier)
+            (identifier)))))
     (self_closing_element_node
-      (node_identifier)
+      (node_identifier
+        (identifier))
       (node_attributes
         (node_attribute
-          (node_identifier)
+          (node_identifier
+            (identifier))
           (rust_expression
             (string_literal)))
         (node_attribute
-          (node_identifier))
+          (node_identifier
+            (identifier)))
         (node_attribute
-          (node_identifier)
+          (node_identifier
+            (identifier))
           (rust_expression
             (boolean_literal)))
         (node_attribute
-          (node_identifier)
+          (node_identifier
+            (identifier))
           (rust_expression
             (integer_literal)))
         (node_attribute
-          (node_identifier)
+          (node_identifier
+            (identifier))
           (rust_expression
             (call_expression
               (scoped_identifier
@@ -208,10 +240,12 @@ Attributes
                 (identifier))
               (arguments))))))
     (self_closing_element_node
-      (node_identifier)
+      (node_identifier
+        (identifier))
       (node_attributes
         (node_attribute
-          (node_identifier)
+          (node_identifier
+            (identifier))
           (rust_expression
             (closure_expression
               (closure_parameters)
@@ -223,7 +257,8 @@ Attributes
                   (identifier))
                 (identifier)))))
         (node_attribute
-          (node_identifier)
+          (node_identifier
+            (identifier))
           (rust_expression
             (closure_expression
               (closure_parameters)
@@ -231,10 +266,12 @@ Attributes
                 (identifier)
                 (arguments)))))))
     (self_closing_element_node
-      (node_identifier)
+      (node_identifier
+        (identifier))
       (node_attributes
         (node_attribute
-          (node_identifier)
+          (node_identifier
+            (identifier))
           (rust_expression
             (if_expression
               (call_expression
@@ -266,26 +303,31 @@ Block expressions
           (string_literal))))
     (element_node
       (open_tag
-        (node_identifier))
+        (node_identifier
+          (identifier)))
       (nodes
         (rust_block
           (let_declaration
             (identifier)
             (string_literal))))
       (close_tag
-        (node_identifier)))
+        (node_identifier
+          (identifier))))
     (self_closing_element_node
-      (node_identifier)
+      (node_identifier
+        (identifier))
       (node_attributes
         (rust_block
           (let_declaration
             (identifier)
             (string_literal)))))
     (self_closing_element_node
-      (node_identifier)
+      (node_identifier
+        (identifier))
       (node_attributes
         (node_attribute
-          (node_identifier)
+          (node_identifier
+            (identifier))
           (rust_expression
             (block
               (let_declaration
@@ -306,19 +348,23 @@ Generics in self-closing nodes
   (nodes
     (self_closing_element_node
       (generic_identifier
-        (node_identifier)
+        (node_identifier
+          (identifier))
         (rust_type
           (type_identifier))))
     (self_closing_element_node
       (generic_identifier
-        (node_identifier)
+        (node_identifier
+          (identifier)
+          (identifier))
         (rust_type
           (scoped_type_identifier
             (identifier)
             (type_identifier)))))
     (self_closing_element_node
       (generic_identifier
-        (node_identifier)
+        (node_identifier
+          (identifier))
         (rust_type
           (generic_type
             (type_identifier)

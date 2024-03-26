@@ -14,7 +14,8 @@ view! {
     (delim_nodes
       (nodes
         (self_closing_element_node
-          (node_identifier))))))
+          (node_identifier
+            (identifier)))))))
 
 ==================================
 Rust statement
