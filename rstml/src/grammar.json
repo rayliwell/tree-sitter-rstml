@@ -9381,8 +9381,13 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_node_identifier_part"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node_identifier_part"
+          },
+          "named": true,
+          "value": "identifier"
         },
         {
           "type": "REPEAT",
@@ -9407,8 +9412,13 @@
                 ]
               },
               {
-                "type": "SYMBOL",
-                "name": "_node_identifier_part"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_node_identifier_part"
+                },
+                "named": true,
+                "value": "identifier"
               }
             ]
           }

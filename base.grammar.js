@@ -88,7 +88,10 @@ module.exports = {
       ),
 
     node_identifier: $ =>
-      sepBy1(choice(':', '::', '-'), $._node_identifier_part),
+      sepBy1(
+        choice(':', '::', '-'),
+        alias($._node_identifier_part, $.identifier),
+      ),
 
     generic_identifier: $ =>
       seq($.node_identifier, seq('<', alias($._type, $.rust_type), '>')),
