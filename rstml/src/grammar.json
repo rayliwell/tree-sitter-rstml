@@ -10,16 +10,11 @@
           "name": "delim_nodes"
         },
         {
-          "type": "ALIAS",
+          "type": "REPEAT1",
           "content": {
-            "type": "REPEAT1",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_node_except_block"
-            }
-          },
-          "named": true,
-          "value": "nodes"
+            "type": "SYMBOL",
+            "name": "_node_except_block"
+          }
         }
       ]
     },
@@ -8993,17 +8988,6 @@
       "type": "PATTERN",
       "value": "\\$[a-zA-Z_]\\w*"
     },
-    "nodes": {
-      "type": "PREC_DYNAMIC",
-      "value": 1,
-      "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "SYMBOL",
-          "name": "_node"
-        }
-      }
-    },
     "_node": {
       "type": "CHOICE",
       "members": [
@@ -9198,16 +9182,11 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "nodes"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
         },
         {
           "type": "FIELD",
@@ -9464,8 +9443,11 @@
           "value": "{"
         },
         {
-          "type": "SYMBOL",
-          "name": "nodes"
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
         },
         {
           "type": "STRING",
@@ -9515,9 +9497,6 @@
     ],
     [
       "array_expression"
-    ],
-    [
-      "nodes"
     ]
   ],
   "precedences": [],

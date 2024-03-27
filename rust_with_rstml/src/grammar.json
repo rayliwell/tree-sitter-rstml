@@ -8970,17 +8970,6 @@
       "type": "PATTERN",
       "value": "\\$[a-zA-Z_]\\w*"
     },
-    "nodes": {
-      "type": "PREC_DYNAMIC",
-      "value": 1,
-      "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "SYMBOL",
-          "name": "_node"
-        }
-      }
-    },
     "_node": {
       "type": "CHOICE",
       "members": [
@@ -9175,16 +9164,11 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "nodes"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
         },
         {
           "type": "FIELD",
@@ -9515,16 +9499,11 @@
           "value": "{"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "nodes"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_node"
+          }
         },
         {
           "type": "STRING",
@@ -9574,9 +9553,6 @@
     ],
     [
       "array_expression"
-    ],
-    [
-      "nodes"
     ]
   ],
   "precedences": [],

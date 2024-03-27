@@ -1507,11 +1507,39 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "nodes",
+          "type": "comment_node",
+          "named": true
+        },
+        {
+          "type": "doctype_node",
+          "named": true
+        },
+        {
+          "type": "element_node",
+          "named": true
+        },
+        {
+          "type": "raw_string_literal",
+          "named": true
+        },
+        {
+          "type": "rust_block",
+          "named": true
+        },
+        {
+          "type": "self_closing_element_node",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "text_node",
           "named": true
         }
       ]
@@ -1602,11 +1630,39 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "nodes",
+          "type": "comment_node",
+          "named": true
+        },
+        {
+          "type": "doctype_node",
+          "named": true
+        },
+        {
+          "type": "element_node",
+          "named": true
+        },
+        {
+          "type": "raw_string_literal",
+          "named": true
+        },
+        {
+          "type": "rust_block",
+          "named": true
+        },
+        {
+          "type": "self_closing_element_node",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "text_node",
           "named": true
         }
       ]
@@ -3118,49 +3174,6 @@
       "types": [
         {
           "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "nodes",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "comment_node",
-          "named": true
-        },
-        {
-          "type": "doctype_node",
-          "named": true
-        },
-        {
-          "type": "element_node",
-          "named": true
-        },
-        {
-          "type": "raw_string_literal",
-          "named": true
-        },
-        {
-          "type": "rust_block",
-          "named": true
-        },
-        {
-          "type": "self_closing_element_node",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "text_node",
           "named": true
         }
       ]

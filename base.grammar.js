@@ -10,12 +10,10 @@ const rustGrammar = require('./rust.grammar.js')
 module.exports = {
   ...rustGrammar,
 
-  conflicts: $ => [...rustGrammar.conflicts($), [$.nodes]],
+  conflicts: $ => [...rustGrammar.conflicts($)],
 
   rules: {
     ...rustGrammar.rules,
-
-    nodes: $ => prec.dynamic(1, repeat1($._node)),
 
     _node: $ => choice($._node_except_block, alias($.block, $.rust_block)),
 
@@ -59,7 +57,7 @@ module.exports = {
     element_node: $ =>
       seq(
         field('open_tag', $.open_tag),
-        optional($.nodes),
+        repeat($._node),
         field('close_tag', $.close_tag),
       ),
 
