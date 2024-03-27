@@ -23,15 +23,12 @@ module.exports = {
       choice(
         $.element_node,
         $.self_closing_element_node,
-        $.fragment_node,
         $.doctype_node,
         $.comment_node,
         $.raw_string_literal,
         $.string_literal,
         $.text_node,
       ),
-
-    fragment_node: $ => seq('<>', optional($.nodes), '</>'),
 
     doctype_node: $ =>
       seq(
@@ -69,12 +66,16 @@ module.exports = {
     open_tag: $ =>
       seq(
         '<',
-        field('name', $.node_identifier),
-        field('attributes', optional($.node_attributes)),
+        optional(
+          seq(
+            field('name', $.node_identifier),
+            field('attributes', optional($.node_attributes)),
+          ),
+        ),
         token(prec(1, '>')),
       ),
 
-    close_tag: $ => seq('</', field('name', $.node_identifier), '>'),
+    close_tag: $ => seq('</', optional(field('name', $.node_identifier)), '>'),
 
     node_attributes: $ =>
       repeat1(choice($.node_attribute, alias($.block, $.rust_block))),

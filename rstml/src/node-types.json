@@ -1154,7 +1154,7 @@
     "fields": {
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "node_identifier",
@@ -2100,21 +2100,6 @@
         },
         {
           "type": "visibility_modifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "fragment_node",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "nodes",
           "named": true
         }
       ]
@@ -3150,10 +3135,6 @@
           "named": true
         },
         {
-          "type": "fragment_node",
-          "named": true
-        },
-        {
           "type": "raw_string_literal",
           "named": true
         },
@@ -3192,7 +3173,7 @@
       },
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "node_identifier",
@@ -5315,10 +5296,6 @@
     "named": false
   },
   {
-    "type": "</>",
-    "named": false
-  },
-  {
     "type": "<<",
     "named": false
   },
@@ -5328,10 +5305,6 @@
   },
   {
     "type": "<=",
-    "named": false
-  },
-  {
-    "type": "<>",
     "named": false
   },
   {
