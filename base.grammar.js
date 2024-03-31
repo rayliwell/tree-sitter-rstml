@@ -12,7 +12,13 @@ module.exports = {
 
   conflicts: $ => [
     ...rustGrammar.conflicts($),
-    [$.element_node, $.self_closing_element_node, $.generic_identifier],
+    [
+      $.element_node,
+      $.self_closing_element_node,
+      $.generic_identifier,
+      $.open_tag,
+      $.close_tag,
+    ],
   ],
 
   rules: {
@@ -71,18 +77,25 @@ module.exports = {
       ),
 
     open_tag: $ =>
-      seq(
-        '<',
-        optional(
-          seq(
-            field('name', $.node_identifier),
-            field('attributes', optional($.node_attributes)),
+      prec.dynamic(
+        1,
+        seq(
+          '<',
+          optional(
+            seq(
+              field('name', $.node_identifier),
+              field('attributes', optional($.node_attributes)),
+            ),
           ),
+          token(prec(1, '>')),
         ),
-        token(prec(1, '>')),
       ),
 
-    close_tag: $ => seq('</', optional(field('name', $.node_identifier)), '>'),
+    close_tag: $ =>
+      prec.dynamic(
+        1,
+        seq('</', optional(field('name', $.node_identifier)), '>'),
+      ),
 
     node_attributes: $ =>
       repeat1(choice($.node_attribute, alias($.block, $.rust_block))),
