@@ -9104,99 +9104,107 @@
       ]
     },
     "self_closing_element_node": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "<"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "name",
-              "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "node_identifier"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "generic_identifier"
-                  }
-                ]
-              }
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "block"
-              },
-              "named": true,
-              "value": "rust_block"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "attributes",
-          "content": {
+      "type": "PREC_DYNAMIC",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "<"
+          },
+          {
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "node_attributes"
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "node_identifier"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "generic_identifier"
+                    }
+                  ]
+                }
               },
               {
-                "type": "BLANK"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "block"
+                },
+                "named": true,
+                "value": "rust_block"
               }
             ]
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 1,
+          },
+          {
+            "type": "FIELD",
+            "name": "attributes",
             "content": {
-              "type": "STRING",
-              "value": "/>"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "node_attributes"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "STRING",
+                "value": "/>"
+              }
             }
           }
-        }
-      ]
+        ]
+      }
     },
     "element_node": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "open_tag",
-          "content": {
-            "type": "SYMBOL",
-            "name": "open_tag"
+      "type": "PREC_DYNAMIC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "open_tag",
+            "content": {
+              "type": "SYMBOL",
+              "name": "open_tag"
+            }
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_node"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "close_tag",
+            "content": {
+              "type": "SYMBOL",
+              "name": "close_tag"
+            }
           }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_node"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "close_tag",
-          "content": {
-            "type": "SYMBOL",
-            "name": "close_tag"
-          }
-        }
-      ]
+        ]
+      }
     },
     "open_tag": {
       "type": "SEQ",
@@ -9497,6 +9505,10 @@
     ],
     [
       "array_expression"
+    ],
+    [
+      "element_node",
+      "self_closing_element_node"
     ]
   ],
   "precedences": [],
