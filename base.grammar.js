@@ -47,13 +47,7 @@ module.exports = {
       seq(
         '<',
         choice(
-          field(
-            'name',
-            choice(
-              $.node_identifier,
-              // $.generic_identifier
-            ),
-          ),
+          field('name', choice($.node_identifier, $.generic_identifier)),
           alias($.block, $.rust_block),
         ),
         field('attributes', optional($.node_attributes)),
@@ -101,7 +95,7 @@ module.exports = {
     generic_identifier: $ =>
       seq(
         $.node_identifier,
-        prec(-1, seq('<', alias($._type, $.rust_type), '>')),
+        seq(token.immediate('<'), alias($._type, $.rust_type), '>'),
       ),
 
     _node_identifier_part: _ => /[\p{XID_Start}_][\p{XID_Continue}_]*/,

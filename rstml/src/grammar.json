@@ -9122,6 +9122,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "node_identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "generic_identifier"
                   }
                 ]
               }
@@ -9400,30 +9404,29 @@
           "name": "node_identifier"
         },
         {
-          "type": "PREC",
-          "value": -1,
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
                 "type": "STRING",
                 "value": "<"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_type"
-                },
-                "named": true,
-                "value": "rust_type"
-              },
-              {
-                "type": "STRING",
-                "value": ">"
               }
-            ]
-          }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_type"
+              },
+              "named": true,
+              "value": "rust_type"
+            },
+            {
+              "type": "STRING",
+              "value": ">"
+            }
+          ]
         }
       ]
     },
