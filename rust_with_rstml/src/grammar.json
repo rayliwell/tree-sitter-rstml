@@ -9387,35 +9387,39 @@
       ]
     },
     "generic_identifier": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "node_identifier"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "<"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_type"
+      "type": "PREC_DYNAMIC",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "node_identifier"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "<"
               },
-              "named": true,
-              "value": "rust_type"
-            },
-            {
-              "type": "STRING",
-              "value": ">"
-            }
-          ]
-        }
-      ]
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_type"
+                },
+                "named": true,
+                "value": "rust_type"
+              },
+              {
+                "type": "STRING",
+                "value": ">"
+              }
+            ]
+          }
+        ]
+      }
     },
     "_node_identifier_part": {
       "type": "PATTERN",
@@ -9564,7 +9568,8 @@
     ],
     [
       "element_node",
-      "self_closing_element_node"
+      "self_closing_element_node",
+      "generic_identifier"
     ]
   ],
   "precedences": [],

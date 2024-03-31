@@ -12,7 +12,7 @@ module.exports = {
 
   conflicts: $ => [
     ...rustGrammar.conflicts($),
-    [$.element_node, $.self_closing_element_node],
+    [$.element_node, $.self_closing_element_node, $.generic_identifier],
   ],
 
   rules: {
@@ -102,7 +102,10 @@ module.exports = {
       ),
 
     generic_identifier: $ =>
-      seq($.node_identifier, seq('<', alias($._type, $.rust_type), '>')),
+      prec.dynamic(
+        0,
+        seq($.node_identifier, seq('<', alias($._type, $.rust_type), '>')),
+      ),
 
     _node_identifier_part: _ => /[\p{XID_Start}_][\p{XID_Continue}_]*/,
 
