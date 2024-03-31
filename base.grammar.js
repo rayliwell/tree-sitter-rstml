@@ -98,8 +98,11 @@ module.exports = {
         alias($._node_identifier_part, $.identifier),
       ),
 
-    // generic_identifier: $ =>
-    // seq($.node_identifier, seq('<', alias($._type, $.rust_type), '>')),
+    generic_identifier: $ =>
+      seq(
+        $.node_identifier,
+        prec(-1, seq('<', alias($._type, $.rust_type), '>')),
+      ),
 
     _node_identifier_part: _ => /[\p{XID_Start}_][\p{XID_Continue}_]*/,
 
