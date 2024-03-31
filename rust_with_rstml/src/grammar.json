@@ -9104,10 +9104,6 @@
                   {
                     "type": "SYMBOL",
                     "name": "node_identifier"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "generic_identifier"
                   }
                 ]
               }
@@ -9378,37 +9374,6 @@
         }
       ]
     },
-    "generic_identifier": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "node_identifier"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "<"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_type"
-              },
-              "named": true,
-              "value": "rust_type"
-            },
-            {
-              "type": "STRING",
-              "value": ">"
-            }
-          ]
-        }
-      ]
-    },
     "_node_identifier_part": {
       "type": "PATTERN",
       "value": "[\\p{XID_Start}_][\\p{XID_Continue}_]*"
@@ -9553,6 +9518,9 @@
     ],
     [
       "array_expression"
+    ],
+    [
+      "_node"
     ]
   ],
   "precedences": [],

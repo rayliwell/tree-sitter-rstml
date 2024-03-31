@@ -2416,25 +2416,6 @@
     }
   },
   {
-    "type": "generic_identifier",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "node_identifier",
-          "named": true
-        },
-        {
-          "type": "rust_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "generic_type",
     "named": true,
     "fields": {
@@ -3800,10 +3781,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "generic_identifier",
-            "named": true
-          },
           {
             "type": "node_identifier",
             "named": true

@@ -10,7 +10,7 @@ const rustGrammar = require('./rust.grammar.js')
 module.exports = {
   ...rustGrammar,
 
-  conflicts: $ => [...rustGrammar.conflicts($)],
+  conflicts: $ => [...rustGrammar.conflicts($), [$._node]],
 
   rules: {
     ...rustGrammar.rules,
@@ -47,7 +47,13 @@ module.exports = {
       seq(
         '<',
         choice(
-          field('name', choice($.node_identifier, $.generic_identifier)),
+          field(
+            'name',
+            choice(
+              $.node_identifier,
+              // $.generic_identifier
+            ),
+          ),
           alias($.block, $.rust_block),
         ),
         field('attributes', optional($.node_attributes)),
@@ -92,8 +98,8 @@ module.exports = {
         alias($._node_identifier_part, $.identifier),
       ),
 
-    generic_identifier: $ =>
-      seq($.node_identifier, seq('<', alias($._type, $.rust_type), '>')),
+    // generic_identifier: $ =>
+    // seq($.node_identifier, seq('<', alias($._type, $.rust_type), '>')),
 
     _node_identifier_part: _ => /[\p{XID_Start}_][\p{XID_Continue}_]*/,
 
