@@ -9519,11 +9519,11 @@
       "array_expression"
     ],
     [
+      "element_node"
+    ],
+    [
       "element_node",
-      "self_closing_element_node",
-      "generic_identifier",
-      "open_tag",
-      "close_tag"
+      "self_closing_element_node"
     ]
   ],
   "precedences": [],

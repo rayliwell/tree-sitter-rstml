@@ -12,13 +12,8 @@ module.exports = {
 
   conflicts: $ => [
     ...rustGrammar.conflicts($),
-    [
-      $.element_node,
-      $.self_closing_element_node,
-      $.generic_identifier,
-      $.open_tag,
-      $.close_tag,
-    ],
+    [$.element_node],
+    [$.element_node, $.self_closing_element_node],
   ],
 
   rules: {
