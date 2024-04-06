@@ -15,7 +15,7 @@ module.exports = {
   rules: {
     ...rustGrammar.rules,
 
-    _node: $ => choice($._node_except_block, alias($.block, $.rust_block)),
+    _node: $ => choice($._node_except_block, $.block),
 
     _node_except_block: $ =>
       choice(
@@ -48,9 +48,9 @@ module.exports = {
         '<',
         choice(
           field('name', choice($.node_identifier, $.generic_identifier)),
-          alias($.block, $.rust_block),
+          $.block,
         ),
-        field('attributes', optional($.node_attributes)),
+        repeat(field('attribute', $._node_attribute)),
         token(prec(1, '/>')),
       ),
 
@@ -67,7 +67,7 @@ module.exports = {
         optional(
           seq(
             field('name', $.node_identifier),
-            field('attributes', optional($.node_attributes)),
+            repeat(field('attribute', $._node_attribute)),
           ),
         ),
         token(prec(1, '>')),
@@ -75,15 +75,13 @@ module.exports = {
 
     close_tag: $ => seq('</', optional(field('name', $.node_identifier)), '>'),
 
-    node_attributes: $ =>
-      repeat1(choice($.node_attribute, alias($.block, $.rust_block))),
+    _node_attribute: $ => choice($.node_identifier, $.node_attribute, $.block),
 
     node_attribute: $ =>
       seq(
         field('name', $.node_identifier),
-        optional(
-          seq('=', field('value', alias($._expression, $.rust_expression))),
-        ),
+        '=',
+        field('value', alias($._expression, $.rust_expression)),
       ),
 
     node_identifier: $ =>
@@ -92,8 +90,7 @@ module.exports = {
         alias($._node_identifier_part, $.identifier),
       ),
 
-    generic_identifier: $ =>
-      seq($.node_identifier, seq('<', alias($._type, $.rust_type), '>')),
+    generic_identifier: $ => seq($.node_identifier, seq('<', $._type, '>')),
 
     _node_identifier_part: _ => /[\p{XID_Start}_][\p{XID_Continue}_]*/,
 

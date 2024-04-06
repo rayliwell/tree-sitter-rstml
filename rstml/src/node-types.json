@@ -1511,6 +1511,10 @@
       "required": false,
       "types": [
         {
+          "type": "block",
+          "named": true
+        },
+        {
           "type": "comment_node",
           "named": true
         },
@@ -1524,10 +1528,6 @@
         },
         {
           "type": "raw_string_literal",
-          "named": true
-        },
-        {
-          "type": "rust_block",
           "named": true
         },
         {
@@ -1634,6 +1634,10 @@
       "required": false,
       "types": [
         {
+          "type": "block",
+          "named": true
+        },
+        {
           "type": "comment_node",
           "named": true
         },
@@ -1647,10 +1651,6 @@
         },
         {
           "type": "raw_string_literal",
-          "named": true
-        },
-        {
-          "type": "rust_block",
           "named": true
         },
         {
@@ -2424,11 +2424,11 @@
       "required": true,
       "types": [
         {
-          "type": "node_identifier",
+          "type": "_type",
           "named": true
         },
         {
-          "type": "rust_type",
+          "type": "node_identifier",
           "named": true
         }
       ]
@@ -3126,7 +3126,7 @@
       },
       "value": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "rust_expression",
@@ -3134,25 +3134,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "node_attributes",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "node_attribute",
-          "named": true
-        },
-        {
-          "type": "rust_block",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -3174,12 +3155,20 @@
     "type": "open_tag",
     "named": true,
     "fields": {
-      "attributes": {
-        "multiple": false,
+      "attribute": {
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "node_attributes",
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "node_attribute",
+            "named": true
+          },
+          {
+            "type": "node_identifier",
             "named": true
           }
         ]
@@ -3589,33 +3578,6 @@
     }
   },
   {
-    "type": "rust_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "_declaration_statement",
-          "named": true
-        },
-        {
-          "type": "_expression",
-          "named": true
-        },
-        {
-          "type": "expression_statement",
-          "named": true
-        },
-        {
-          "type": "label",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "scoped_identifier",
     "named": true,
     "fields": {
@@ -3777,12 +3739,20 @@
     "type": "self_closing_element_node",
     "named": true,
     "fields": {
-      "attributes": {
-        "multiple": false,
+      "attribute": {
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "node_attributes",
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "node_attribute",
+            "named": true
+          },
+          {
+            "type": "node_identifier",
             "named": true
           }
         ]
@@ -3807,7 +3777,7 @@
       "required": false,
       "types": [
         {
-          "type": "rust_block",
+          "type": "block",
           "named": true
         }
       ]
