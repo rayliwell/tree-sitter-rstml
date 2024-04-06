@@ -35,16 +35,13 @@
   "tree-sitter": [
     {
       "scope": "source.rust.rstml",
-      "path": "rstml",
-      "highlights": ["queries/highlights.scm"]
+      "path": "rstml"
     },
     {
       "scope": "source.rust.rust_with_rstml",
       "path": "rust_with_rstml",
       "file-types": ["rs"],
-      "content-regex": "view!",
-      "highlights": ["queries/highlights.scm"],
-      "injections": ["queries/injections.scm"]
+      "content-regex": "view!"
     }
   ]
 }
