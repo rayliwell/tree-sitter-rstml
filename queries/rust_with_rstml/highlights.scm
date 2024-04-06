@@ -449,7 +449,8 @@
   macro: (identifier) @keyword.debug
   "!" @keyword.debug
   (#eq? @keyword.debug "dbg"))
-(doctype_node) @constant
+((doctype_node) @constant
+  (#set! "priority" 101))
 
 (doctype_node
   [
@@ -488,16 +489,20 @@
   (#set! "priority" 101))
 
 (open_tag
-  name: (node_identifier) @tag)
+  name: (node_identifier) @tag
+  (#set! "priority" 101))
 
 (close_tag
-  name: (node_identifier) @tag)
+  name: (node_identifier) @tag
+  (#set! "priority" 101))
 
 (self_closing_element_node
-  name: (node_identifier) @tag)
+  name: (node_identifier) @tag
+  (#set! "priority" 101))
 
 (node_attribute
-  name: (node_identifier) @tag.attribute)
+  name: (node_identifier) @tag.attribute
+  (#set! "priority" 101))
 
 (generic_identifier
   [
@@ -516,4 +521,5 @@
   [
     "<!--"
     "-->"
-  ] @comment)
+  ] @comment
+  (#set! "priority" 101))
