@@ -117,7 +117,7 @@ Neovim's [tree-sitter integration](https://neovim.io/doc/user/treesitter.html) s
 |---------------------------------------------------|-------------------------------------------------|
 | ![before](/assets/neovim_before_highlighting.png) | ![after](/assets/neovim_after_highlighting.png) |
 
-To use the Neovim support, [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) you should:
+To use the Neovim support with [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter), you should:
 
 - Ensure `"nvim-treesitter/nvim-treesitter"` is installed and configured correctly.
 - Install the `"rayliwell/tree-sitter-rstml"` plugin in your preferred package manager.
