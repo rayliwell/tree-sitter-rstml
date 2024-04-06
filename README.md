@@ -128,7 +128,7 @@ Here's an example config using [lazy.nvim](https://github.com/folke/lazy.nvim):
 ```lua
 require("lazy").setup({
     {
-        "rayliwell/nvim-treesitter",
+        "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function ()
             local configs = require("nvim-treesitter.configs")
