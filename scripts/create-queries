@@ -1,5 +1,13 @@
 #!/bin/sh
 
+rm node_modules/nvim-treesitter -rf
+git clone --depth 1 https://github.com/nvim-treesitter/nvim-treesitter node_modules/nvim-treesitter
+
+cat node_modules/nvim-treesitter/queries/rust/highlights.scm base_queries/highlights.scm > queries/rust_with_rstml/highlights.scm
+cat node_modules/nvim-treesitter/queries/rust/indents.scm base_queries/indents.scm > queries/rust_with_rstml/indents.scm
+cat base_queries/injections.scm > queries/rust_with_rstml/injections.scm
+cat node_modules/nvim-treesitter/queries/rust/folds.scm base_queries/folds.scm > queries/rust_with_rstml/folds.scm
+
 mkdir -p rstml/queries
 mkdir -p rust_with_rstml/queries
 
