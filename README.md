@@ -121,7 +121,7 @@ To use the Neovim support, [nvim-treesitter](https://github.com/nvim-treesitter/
 
 - Ensure `"nvim-treesitter/nvim-treesitter"` is installed and configured correctly.
 - Install the `"rayliwell/tree-sitter-rstml"` plugin in your preferred package manager.
-- Ensure `require('tree-sitter-rstml').setup()` is ran after everytime `nvim-treesitter` is loaded.
+- Ensure `require("tree-sitter-rstml").setup()` is ran after everytime `nvim-treesitter` is loaded.
 
 Here's an example config using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
@@ -146,11 +146,21 @@ require("lazy").setup({
         dependencies = { "nvim-treesitter" },
         build = ":TSUpdate",
         config = function ()
-    	   require('tree-sitter-rstml').setup()
+    	   require("tree-sitter-rstml").setup()
         end
     },
 })
 ```
+
+### Emacs
+
+Emacs' (29.1+) [tree-sitter integration](https://www.masteringemacs.org/article/how-to-get-started-tree-sitter) supports syntax highlighting and indentation.
+
+| **Before (`rust-ts-mode`)**                      | **After (`rstml-ts-mode`)**                    |
+|--------------------------------------------------|------------------------------------------------|
+| ![before](/assets/emacs_before_highlighting.png) | ![after](/assets/emacs_after_highlighting.png) |
+
+Emacs support is provided by the `rstml-ts-mode` package. Installation instructions can be found on the project's [GitHub](https://github.com/rayliwell/rstml-ts-mode).
 
 ## Acknowledgements
 
