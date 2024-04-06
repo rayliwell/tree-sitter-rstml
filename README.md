@@ -109,37 +109,47 @@ const tree = parser.parse(code)
 
 ## Editor support
 
-### Neovim (experimental)
+### Neovim
 
 Neovim's [tree-sitter integration](https://neovim.io/doc/user/treesitter.html) supports syntax highlighting, indentation, and code folding.
 
-| Without `rstml` highlighting                                                                        | With `rstml` highlighting                                                                          |
-|-----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| Without `rstml` highlighting                      | With `rstml` highlighting                       |
+|---------------------------------------------------|-------------------------------------------------|
 | ![before](/assets/neovim_before_highlighting.png) | ![after](/assets/neovim_after_highlighting.png) |
 
-To test the experimental Neovim support, [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) users should:
+To use the Neovim support, [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) you should:
 
-- Replace `"nvim-treesitter/nvim-treesitter"` with `"rayliwell/nvim-treesitter"` in your package manager's config.
-- Add `"rstml"` to `ensure_installed` in `nvim-treesitter.configs.setup`.
-- Run the update command of your preferred Neovim package manager and run `:TSUpdate`.
+- Ensure `"nvim-treesitter/nvim-treesitter"` is installed and configured correctly.
+- Install the `"rayliwell/tree-sitter-rstml"` plugin in your preferred package manager.
+- Ensure `require('tree-sitter-rstml').setup()` is ran after everytime `nvim-treesitter` is loaded.
 
 Here's an example config using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
-require("lazy").setup({{
-    "rayliwell/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function ()
-        local configs = require("nvim-treesitter.configs")
+require("lazy").setup({
+    {
+        "rayliwell/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function ()
+            local configs = require("nvim-treesitter.configs")
 
-        configs.setup({
-            ensure_installed = { "rust", "rstml" },
-            sync_install = false,
-            highlight = { enable = true },
-            indent = { enable = true },
-        })
-    end
-}})
+            configs.setup({
+                ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust" },
+                sync_install = false,
+                highlight = { enable = true },
+                indent = { enable = true },
+            })
+        end
+    },
+    {
+        "rayliwell/tree-sitter-rstml",
+        dependencies = { "nvim-treesitter" },
+        build = ":TSUpdate",
+        config = function ()
+    	   require('tree-sitter-rstml').setup()
+        end
+    },
+})
 ```
 
 ## Acknowledgements
