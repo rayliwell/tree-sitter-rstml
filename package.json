@@ -20,7 +20,7 @@
     "tree-sitter-rust": "github:tree-sitter/tree-sitter-rust"
   },
   "scripts": {
-    "build": "npm run build-rstml && npm run build-rust-with-rstml && ./scripts/import-scanners",
+    "build": "./scripts/import-scanners && ./scripts/create-queries && npm run build-rstml && npm run build-rust-with-rstml",
     "test": "npm run test-rstml && npm run test-rust-with-rstml && npm run test-bindings",
     "test-bindings": "cargo test && node --test ./bindings/node/test.js",
     "build-rstml": "cd rstml && tree-sitter generate --no-bindings",

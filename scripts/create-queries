@@ -1,0 +1,7 @@
+#!/bin/sh
+
+mkdir -p rstml/queries
+mkdir -p rust_with_rstml/queries
+
+cat node_modules/tree-sitter-rust/queries/highlights.scm queries/highlights.scm > rstml/queries/highlights.scm
+cat node_modules/tree-sitter-rust/queries/highlights.scm queries/highlights.scm > rust_with_rstml/queries/highlights.scm

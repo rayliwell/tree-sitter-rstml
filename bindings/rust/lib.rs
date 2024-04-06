@@ -31,6 +31,8 @@ pub const RSTML_NODE_TYPES: &'static str = include_str!("../../rstml/src/node-ty
 pub const RUST_WITH_RSTML_NODE_TYPES: &'static str =
     include_str!("../../rust_with_rstml/src/node-types.json");
 
+pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../rstml/queries/highlights.scm");
+
 #[cfg(test)]
 mod tests {
     #[test]
