@@ -121,7 +121,7 @@ To use the Neovim support with [nvim-treesitter](https://github.com/nvim-treesit
 
 - Ensure `"nvim-treesitter/nvim-treesitter"` is installed and configured correctly.
 - Install the `"rayliwell/tree-sitter-rstml"` plugin in your preferred package manager.
-- Ensure `require("tree-sitter-rstml").setup()` is ran after everytime `nvim-treesitter` is loaded.
+- Ensure `require("tree-sitter-rstml").setup()` is ran after every time `nvim-treesitter` is loaded.
 
 Here's an example config using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
@@ -148,6 +148,13 @@ require("lazy").setup({
         config = function ()
     	   require("tree-sitter-rstml").setup()
         end
+    },
+    -- Experimental automatic tag closing and renaming (optional)
+    {
+        "rayliwell/nvim-ts-autotag",
+        config = function()
+            require("nvim-ts-autotag").setup()
+        end,
     },
 })
 ```
