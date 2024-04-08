@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
 	local parsers = require("nvim-treesitter.parsers")
+	-- Support nvim-treesitter versions before and after 1.10.
 	local configs = parsers.configs and parsers.configs or parsers.get_parser_configs()
 
 	configs.rust_with_rstml = {
