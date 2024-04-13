@@ -1,25 +1,43 @@
+#include "tree_sitter/alloc.h"
 #include "tree_sitter/parser.h"
+
 #include <wctype.h>
 
 enum TokenType {
     STRING_CONTENT,
-    RAW_STRING_LITERAL,
+    RAW_STRING_LITERAL_START,
+    RAW_STRING_LITERAL_CONTENT,
+    RAW_STRING_LITERAL_END,
     FLOAT_LITERAL,
-    BLOCK_OUTER_DOC,
-    BLOCK_INNER_DOC,
-    BLOCK_COMMENT_END,
+    BLOCK_OUTER_DOC_MARKER,
+    BLOCK_INNER_DOC_MARKER,
+    BLOCK_COMMENT_CONTENT,
+    LINE_DOC_CONTENT,
     ERROR_SENTINEL
 };
 
-void *tree_sitter_rstml_external_scanner_create() { return NULL; }
+typedef struct {
+    uint8_t opening_hash_count;
+} Scanner;
 
-void tree_sitter_rstml_external_scanner_destroy(void *p) {}
+void *tree_sitter_rstml_external_scanner_create() { return ts_calloc(1, sizeof(Scanner)); }
 
-void tree_sitter_rstml_external_scanner_reset(void *p) {}
+void tree_sitter_rstml_external_scanner_destroy(void *payload) { ts_free((Scanner *)payload); }
 
-unsigned tree_sitter_rstml_external_scanner_serialize(void *p, char *buffer) { return 0; }
+unsigned tree_sitter_rstml_external_scanner_serialize(void *payload, char *buffer) {
+    Scanner *scanner = (Scanner *)payload;
+    buffer[0] = (char)scanner->opening_hash_count;
+    return 1;
+}
 
-void tree_sitter_rstml_external_scanner_deserialize(void *p, const char *b, unsigned n) {}
+void tree_sitter_rstml_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {
+    Scanner *scanner = (Scanner *)payload;
+    scanner->opening_hash_count = 0;
+    if (length == 1) {
+        Scanner *scanner = (Scanner *)payload;
+        scanner->opening_hash_count = buffer[0];
+    }
+}
 
 static inline bool is_num_char(int32_t c) { return c == '_' || iswdigit(c); }
 
@@ -44,8 +62,7 @@ static inline bool process_string(TSLexer *lexer) {
     return has_content;
 }
 
-static inline bool process_raw_string(TSLexer *lexer) {
-    lexer->result_symbol = RAW_STRING_LITERAL;
+static inline bool scan_raw_string_start(Scanner *scanner, TSLexer *lexer) {
     if (lexer->lookahead == 'b' || lexer->lookahead == 'c') {
         advance(lexer);
     }
@@ -54,7 +71,7 @@ static inline bool process_raw_string(TSLexer *lexer) {
     }
     advance(lexer);
 
-    unsigned opening_hash_count = 0;
+    uint8_t opening_hash_count = 0;
     while (lexer->lookahead == '#') {
         advance(lexer);
         opening_hash_count++;
@@ -64,26 +81,42 @@ static inline bool process_raw_string(TSLexer *lexer) {
         return false;
     }
     advance(lexer);
+    scanner->opening_hash_count = opening_hash_count;
 
+    lexer->result_symbol = RAW_STRING_LITERAL_START;
+    return true;
+}
+
+static inline bool scan_raw_string_content(Scanner *scanner, TSLexer *lexer) {
     for (;;) {
         if (lexer->eof(lexer)) {
             return false;
         }
         if (lexer->lookahead == '"') {
+            lexer->mark_end(lexer);
             advance(lexer);
             unsigned hash_count = 0;
-            while (lexer->lookahead == '#' && hash_count < opening_hash_count) {
+            while (lexer->lookahead == '#' && hash_count < scanner->opening_hash_count) {
                 advance(lexer);
                 hash_count++;
             }
-            if (hash_count == opening_hash_count) {
-                lexer->mark_end(lexer);
+            if (hash_count == scanner->opening_hash_count) {
+                lexer->result_symbol = RAW_STRING_LITERAL_CONTENT;
                 return true;
             }
         } else {
             advance(lexer);
         }
     }
+}
+
+static inline bool scan_raw_string_end(Scanner *scanner, TSLexer *lexer) {
+    advance(lexer);
+    for (unsigned i = 0; i < scanner->opening_hash_count; i++) {
+        advance(lexer);
+    }
+    lexer->result_symbol = RAW_STRING_LITERAL_END;
+    return true;
 }
 
 static inline bool process_float_literal(TSLexer *lexer) {
@@ -151,6 +184,22 @@ static inline bool process_float_literal(TSLexer *lexer) {
     return true;
 }
 
+static inline bool process_line_doc_content(TSLexer *lexer) {
+    lexer->result_symbol = LINE_DOC_CONTENT;
+    for (;;) {
+        if (lexer->eof(lexer)) {
+            return true;
+        }
+        if (lexer->lookahead == '\n') {
+            // Include the newline in the doc content node.
+            // Line endings are useful for markdown injection.
+            advance(lexer);
+            return true;
+        }
+        advance(lexer);
+    }
+}
+
 typedef enum {
     LeftForwardSlash,
     LeftAsterisk,
@@ -169,8 +218,9 @@ static inline void process_left_forward_slash(BlockCommentProcessing *processing
     processing->state = Continuing;
 };
 
-static inline void process_left_asterisk(BlockCommentProcessing *processing, char current) {
+static inline void process_left_asterisk(BlockCommentProcessing *processing, char current, TSLexer *lexer) {
     if (current == '*') {
+        lexer->mark_end(lexer);
         processing->state = LeftAsterisk;
         return;
     }
@@ -201,32 +251,39 @@ static inline bool process_block_comment(TSLexer *lexer, const bool *valid_symbo
     // happen in one state, we must advance in all states to ensure that
     // the program ends up in a sane state prior to processing the block
     // comment if need be.
-    if (valid_symbols[BLOCK_INNER_DOC] && first == '!') {
-        lexer->result_symbol = BLOCK_INNER_DOC;
+    if (valid_symbols[BLOCK_INNER_DOC_MARKER] && first == '!') {
+        lexer->result_symbol = BLOCK_INNER_DOC_MARKER;
         advance(lexer);
         return true;
     }
-    if (valid_symbols[BLOCK_OUTER_DOC] && first == '*') {
+    if (valid_symbols[BLOCK_OUTER_DOC_MARKER] && first == '*') {
         advance(lexer);
         lexer->mark_end(lexer);
-        // If the next token is a / that means that it's an empty
-        // block comment and we should go to the BLOCK_COMMENT_END case
-        // If the next token is a * that means that this isn't a BLOCK_OUTER_DOC
-        // as BLOCK_OUTER_DOC's only have 2 * not 3 or more.
-        if (lexer->lookahead != '/' && lexer->lookahead != '*') {
-            lexer->result_symbol = BLOCK_OUTER_DOC;
+        // If the next token is a / that means that it's an empty block comment.
+        if (lexer->lookahead == '/') {
+            return false;
+        }
+        // If the next token is a * that means that this isn't a BLOCK_OUTER_DOC_MARKER
+        // as BLOCK_OUTER_DOC_MARKER's only have 2 * not 3 or more.
+        if (lexer->lookahead != '*') {
+            lexer->result_symbol = BLOCK_OUTER_DOC_MARKER;
             return true;
         }
     } else {
         advance(lexer);
     }
 
-    if (valid_symbols[BLOCK_COMMENT_END]) {
+    if (valid_symbols[BLOCK_COMMENT_CONTENT]) {
         BlockCommentProcessing processing = {Continuing, 1};
         // Manually set the current state based on the first character
         switch (first) {
             case '*':
                 processing.state = LeftAsterisk;
+                if (lexer->lookahead == '/') {
+                    // This case can happen in an empty doc block comment
+                    // like /*!*/. The comment has no contents, so bail.
+                    return false;
+                }
                 break;
             case '/':
                 processing.state = LeftForwardSlash;
@@ -253,18 +310,21 @@ static inline bool process_block_comment(TSLexer *lexer, const bool *valid_symbo
                     process_left_forward_slash(&processing, first);
                     break;
                 case LeftAsterisk:
-                    process_left_asterisk(&processing, first);
+                    process_left_asterisk(&processing, first, lexer);
                     break;
                 case Continuing:
+                    lexer->mark_end(lexer);
                     process_continuing(&processing, first);
                     break;
                 default:
                     break;
             }
             advance(lexer);
+            if (first == '/' && processing.nestingDepth != 0) {
+                lexer->mark_end(lexer);
+            }
         }
-        lexer->mark_end(lexer);
-        lexer->result_symbol = BLOCK_COMMENT_END;
+        lexer->result_symbol = BLOCK_COMMENT_CONTENT;
         return true;
     }
 
@@ -293,7 +353,10 @@ bool tree_sitter_rstml_external_scanner_scan(void *payload, TSLexer *lexer, cons
         return false;
     }
 
-    if (valid_symbols[BLOCK_COMMENT_END] || valid_symbols[BLOCK_INNER_DOC] || valid_symbols[BLOCK_OUTER_DOC]) {
+    Scanner *scanner = (Scanner *)payload;
+
+    if (valid_symbols[BLOCK_COMMENT_CONTENT] || valid_symbols[BLOCK_INNER_DOC_MARKER] ||
+        valid_symbols[BLOCK_OUTER_DOC_MARKER]) {
         return process_block_comment(lexer, valid_symbols);
     }
 
@@ -301,13 +364,25 @@ bool tree_sitter_rstml_external_scanner_scan(void *payload, TSLexer *lexer, cons
         return process_string(lexer);
     }
 
+    if (valid_symbols[LINE_DOC_CONTENT]) {
+        return process_line_doc_content(lexer);
+    }
+
     while (iswspace(lexer->lookahead)) {
         skip(lexer);
     }
 
-    if (valid_symbols[RAW_STRING_LITERAL] &&
+    if (valid_symbols[RAW_STRING_LITERAL_START] &&
         (lexer->lookahead == 'r' || lexer->lookahead == 'b' || lexer->lookahead == 'c')) {
-        return process_raw_string(lexer);
+        return scan_raw_string_start(scanner, lexer);
+    }
+
+    if (valid_symbols[RAW_STRING_LITERAL_CONTENT]) {
+        return scan_raw_string_content(scanner, lexer);
+    }
+
+    if (valid_symbols[RAW_STRING_LITERAL_END] && lexer->lookahead == '"') {
+        return scan_raw_string_end(scanner, lexer);
     }
 
     if (valid_symbols[FLOAT_LITERAL] && iswdigit(lexer->lookahead)) {
