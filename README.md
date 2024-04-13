@@ -159,6 +159,9 @@ require("lazy").setup({
 })
 ```
 
+> [!NOTE]
+> Neovim support is intended to work on the latest Neovim release and version of `nvim-treesitter`.  If you are using a Neovim distribution, like LunarVim, support is not guarenteed.
+
 ### Emacs
 
 Emacs' (29.1+) [tree-sitter integration](https://www.masteringemacs.org/article/how-to-get-started-tree-sitter) supports syntax highlighting and indentation.
@@ -167,7 +170,9 @@ Emacs' (29.1+) [tree-sitter integration](https://www.masteringemacs.org/article/
 |--------------------------------------------------|------------------------------------------------|
 | ![before](/assets/emacs_before_highlighting.png) | ![after](/assets/emacs_after_highlighting.png) |
 
-Emacs support is provided by the `rstml-ts-mode` package. Installation instructions can be found on the project's [GitHub](https://github.com/rayliwell/rstml-ts-mode).
+Emacs support is provided by the `rstml-ts-mode` package.
+
+**You can read more on the project's [GitHub](https://github.com/rayliwell/rstml-ts-mode).**
 
 ## Acknowledgements
 
