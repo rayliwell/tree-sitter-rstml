@@ -35,18 +35,21 @@
     ":"
     "::"
   ] @punctuation.delimiter
-  (#set! "priority" 101))
+  (#set! "priority" 103))
 
 (open_tag
   name: (node_identifier) @tag
-  (#set! "priority" 101))
+  (#set! "priority" 102))
 
 (close_tag
   name: (node_identifier) @tag
-  (#set! "priority" 101))
+  (#set! "priority" 102))
 
 (self_closing_element_node
   name: (node_identifier) @tag
+  (#set! "priority" 102))
+
+((node_identifier) @tag.attribute
   (#set! "priority" 101))
 
 (node_attribute
