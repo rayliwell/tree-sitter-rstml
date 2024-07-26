@@ -6,9 +6,8 @@ fn main() {
 
     c_config.include(&rstml_dir);
     c_config
-        .flag_if_supported("-Wno-unused-parameter")
-        .flag_if_supported("-Wno-unused-but-set-variable")
-        .flag_if_supported("-Wno-trigraphs");
+        .flag_if_supported("-std=c11")
+        .flag_if_supported("-Wno-unused-parameter");
 
     for path in &[
         rstml_dir.join("parser.c"),
