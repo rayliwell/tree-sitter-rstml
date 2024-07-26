@@ -9,7 +9,7 @@
   (type_item)
   (union_item)
   (const_item)
-  (use_declaration)
+  (use_declaration)+
   (let_declaration)
   (loop_expression)
   (for_expression)
@@ -21,6 +21,7 @@
   (macro_definition)
   (macro_invocation)
   (attribute_item)
+  (block)
 ] @fold
 [
   (element_node)

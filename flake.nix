@@ -17,7 +17,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
-      {
+      rec {
         devShells = {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
@@ -30,6 +30,42 @@
               python3
               emscripten
             ];
+          };
+        };
+
+        packages = rec {
+          tree-sitter-grammars =
+            let
+              buildGrammar =
+                grammarName:
+                pkgs.tree-sitter.buildGrammar {
+                  version = "1.2.0";
+                  src = ./.;
+                  generate = false;
+                  location = grammarName;
+                  language = grammarName;
+                };
+
+            in
+            {
+              rstml = buildGrammar "rstml";
+              rust_with_rstml = buildGrammar "rust_with_rstml";
+            };
+
+          nvim-treesitter-grammar = tree-sitter-grammars.rust_with_rstml.overrideAttrs (
+            final: prev: {
+              postInstall = ''
+                rm -r $out/queries
+                mkdir $out/queries
+                cp -r ../queries/rust_with_rstml/. $out/queries/
+              '';
+            }
+          );
+        };
+
+        overlays = {
+          default = final: prev: {
+            tree-sitter-grammars = prev.tree-sitter-grammars // packages.tree-sitter-grammars;
           };
         };
       }
