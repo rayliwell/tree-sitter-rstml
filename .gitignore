@@ -6,3 +6,4 @@ package-lock.json
 *.wasm
 **/package.json
 target
+.direnv

@@ -16,20 +16,20 @@
   },
   "devDependencies": {
     "prettier": "^3.2.5",
-    "tree-sitter-cli": "^0.22.2",
     "tree-sitter-rust": "github:tree-sitter/tree-sitter-rust"
   },
   "scripts": {
+    "install": "node-gyp-build",
     "build": "./scripts/import-scanners && ./scripts/create-queries && npm run build-rstml && npm run build-rust-with-rstml",
     "test": "npm run test-rstml && npm run test-rust-with-rstml && npm run test-bindings",
     "test-bindings": "cargo test && node --test ./bindings/node/test.js",
     "build-rstml": "cd rstml && tree-sitter generate --no-bindings",
     "test-rstml": "cd rstml && tree-sitter test",
-    "build-wasm-rstml": "cd rstml && tree-sitter build-wasm",
+    "build-wasm-rstml": "cd rstml && tree-sitter build --wasm",
     "playground-rstml": "npm run build-rstml && npm run build-wasm-rstml && cd rstml && tree-sitter playground",
     "build-rust-with-rstml": "cd rust_with_rstml && tree-sitter generate --no-bindings",
     "test-rust-with-rstml": "cd rust_with_rstml && tree-sitter test",
-    "build-wasm-rust-with-rstml": "cd rust_with_rstml && tree-sitter build-wasm",
+    "build-wasm-rust-with-rstml": "cd rust_with_rstml && tree-sitter build --wasm",
     "playground-rust-with-rstml": "npm run build-rust-with-rstml && npm run build-wasm-rust-with-rstml && cd rust_with_rstml && tree-sitter playground"
   },
   "tree-sitter": [
