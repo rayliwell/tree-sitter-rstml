@@ -63,6 +63,22 @@
           );
         };
 
+        nixvimModule =
+          { config, ... }:
+          {
+            plugins = {
+              treesitter = {
+                grammarPackages = config.plugins.treesitter.package.passthru.allGrammars ++ [
+                  packages.nvim-treesitter-grammar
+                ];
+
+                languageRegister = {
+                  rust_with_rstml = [ "rust" ];
+                };
+              };
+            };
+          };
+
         overlays = {
           default = final: prev: {
             tree-sitter-grammars = prev.tree-sitter-grammars // packages.tree-sitter-grammars;
