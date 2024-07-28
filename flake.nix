@@ -1,5 +1,5 @@
 {
-  description = "Tree sitter rstml";
+  description = "Rust + html grammar for the tree-sitter parser library.";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
