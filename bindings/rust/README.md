@@ -7,7 +7,7 @@ This crate exposes two functions:
     ```
     let code = "<div>Hello, world</div>";
     let mut parser = tree_sitter::Parser::new();
-    parser.set_language(tree_sitter_rstml::language_rstml()).expect("Error loading rstml grammar");
+    parser.set_language(&tree_sitter_rstml::language_rstml()).expect("Error loading rstml grammar");
     let tree = parser.parse(code, None).unwrap();
     ```
 
@@ -20,7 +20,7 @@ This crate exposes two functions:
         }
     "#;
     let mut parser = tree_sitter::Parser::new();
-    parser.set_language(tree_sitter_rstml::language_rust_with_rstml()).expect("Error loading rust_with_rstml grammar");
+    parser.set_language(&tree_sitter_rstml::language_rust_with_rstml()).expect("Error loading rust_with_rstml grammar");
     let tree = parser.parse(code, None).unwrap();
     ```
 You can read more about the reason there are two grammars in the project's [README][readme].

@@ -1,8 +1,10 @@
 Cargo.lock
 node_modules
 build
+result
 *.log
 package-lock.json
 *.wasm
 **/package.json
 target
+.direnv

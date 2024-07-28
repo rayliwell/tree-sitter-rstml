@@ -2969,6 +2969,18 @@
           }
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "where_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": ";"
         }
@@ -9214,7 +9226,7 @@
     },
     "shebang": {
       "type": "PATTERN",
-      "value": "#![\\s]*[^\\[\\s]+"
+      "value": "#![\\s]*[^\\[].+"
     },
     "_reserved_identifier": {
       "type": "ALIAS",

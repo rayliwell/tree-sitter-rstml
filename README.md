@@ -159,6 +159,55 @@ require("lazy").setup({
 })
 ```
 
+### NixVim (Advanced)
+
+To use the [NixVim](https://github.com/nix-community/nixvim) integration with flakes, you should:
+
+- Add `github:rayliwell/tree-sitter-rstml` as a flake input.
+- Import `inputs.tree-sitter-rstml.nixvimModule` inside of your NixVim configuration.
+
+For example:
+```nix
+{
+  description = "NixVim configuration with tree-sitter-rstml.";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixvim.url = "github:nix-community/nixvim";
+    tree-sitter-rstml.url = "github:rayliwell/tree-sitter-rstml/flake";
+  };
+
+  outputs =
+    {
+      system,
+      nixpkgs,
+      nixvim,
+      tree-sitter-rstml,
+      ...
+    }:
+    let
+      forAllSystems =
+        function:
+        nixpkgs.lib.genAttrs [
+          "aarch64-darwin"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "x86_64-linux"
+        ] (system: function nixpkgs.legacyPackages.${system});
+    in
+    {
+      packages = forAllSystems (pkgs: {
+        default = nixvim.legacyPackages.${system}.makeNixvimWithModule {
+          inherit pkgs;
+          module = {
+            imports = [ tree-sitter-rstml.nixvimModule ];
+          };
+        };
+      });
+    };
+}
+```
+
 > [!NOTE]
 > Neovim support is intended to work on the latest Neovim release and version of `nvim-treesitter`.  If you are using a Neovim distribution, like LunarVim, support is not guarenteed.
 
