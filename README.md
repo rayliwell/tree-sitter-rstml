@@ -159,6 +159,9 @@ require("lazy").setup({
 })
 ```
 
+> [!NOTE]
+> Neovim support is intended to work on the latest Neovim release and version of `nvim-treesitter`.  If you are using a Neovim distribution, like LunarVim, support is not guarenteed.
+
 ### NixVim (Advanced)
 
 To use the [NixVim](https://github.com/nix-community/nixvim) integration with flakes, you should:
@@ -207,9 +210,6 @@ For example:
     };
 }
 ```
-
-> [!NOTE]
-> Neovim support is intended to work on the latest Neovim release and version of `nvim-treesitter`.  If you are using a Neovim distribution, like LunarVim, support is not guarenteed.
 
 ### Emacs
 
