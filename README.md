@@ -146,12 +146,12 @@ require("lazy").setup({
         dependencies = { "nvim-treesitter" },
         build = ":TSUpdate",
         config = function ()
-    	   require("tree-sitter-rstml").setup()
+            require("tree-sitter-rstml").setup()
         end
     },
-    -- Experimental automatic tag closing and renaming (optional)
+    -- Automatic tag closing and renaming (optional but highly recommended)
     {
-        "rayliwell/nvim-ts-autotag",
+        "windwp/nvim-ts-autotag",
         config = function()
             require("nvim-ts-autotag").setup()
         end,
