@@ -123,6 +123,10 @@ To use the Neovim support with [nvim-treesitter](https://github.com/nvim-treesit
 - Install the `"rayliwell/tree-sitter-rstml"` plugin in your preferred package manager.
 - Ensure `require("tree-sitter-rstml").setup()` is ran after every time `nvim-treesitter` is loaded.
 
+
+> [!NOTE]
+> You may have to call `:TSInstall rust_with_rstml` the first time you open a Rust buffer for syntax highlighting to work correctly.
+
 Here's an example config using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
