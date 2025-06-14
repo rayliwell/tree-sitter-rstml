@@ -6,7 +6,7 @@
   };
 
   outputs =
-    { nixpkgs, ... }:
+    { nixpkgs, self, ... }:
     let
       forAllSystems =
         function:
@@ -26,7 +26,7 @@
               grammarName:
               pkgs.tree-sitter.buildGrammar {
                 version = "2.0.0";
-                src = ./.;
+                src = self.outPath;
                 generate = false;
                 location = grammarName;
                 language = grammarName;
